@@ -143,6 +143,9 @@ function update!(repo::MockRepo, state::State, scans::Vector)
 end
 
 function update!(repo::Repo, state::State, scans::Vector)
+    if isempty(scans)
+        return repo
+    end
     for scan in scans
         key = scan.page.url
         state.scans[key] = scan
