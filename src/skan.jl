@@ -23,3 +23,7 @@ function skan!(repo, pages::Vector{<:Page})::Vector{PageScan}
 
     return changed
 end
+
+function mail(changed::Vector{PageScan})
+    error("Not implemented yet")
+end

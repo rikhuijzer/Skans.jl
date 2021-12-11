@@ -11,8 +11,10 @@ using WeakRefStrings:
 include("webpage.jl")
 include("state.jl")
 include("skan.jl")
+include("git.jl")
 
 export WebPage
+export GitHubRepo
 export skan!
 
 end # module

@@ -49,16 +49,39 @@ struct MockFileRepo <: Repo
 end
 
 """
-    GitHubRepo(; branch="skan") <: Repo
+    GitHubRepo(;
+        user=ENV["GITHUB_ACTOR"],
+        token=ENV["GITHUB_TOKEN"],
+        repo=ENV["GITHUB_REPOSITORY"],
+        branch="skan"
+    )
 
 Assuming that we run on a GitHub Runner, then no extra information is needed.
 The token and repo can be obtained via `GITHUB_TOKEN` and `GITHUB_REPOSITORY`.
+For public repositories, set `token` to the empty string `""`.
+`repo` is of the form `octocat/Hello-World`.
 """
 struct GitHubRepo <: Repo
+    dir::String
+    user::String255 # octocat
+    token::String255
+    repo::String255 # octocat/Hello-World
     branch::String255
 
-    function GitHubRepo(; branch="skan")
-        return new(String255(branch))
+    function GitHubRepo(;
+            dir=mktempdir(),
+            user=ENV["GITHUB_ACTOR"],
+            token=ENV["GITHUB_TOKEN"],
+            repo=ENV["GITHUB_REPOSITORY"],
+            branch="skan"
+        )
+        return new(
+            dir,
+            String255(user),
+            String255(token),
+            String255(repo),
+            String255(branch)
+        )
     end
 end
 
@@ -86,6 +109,7 @@ Return state from `repo`.
 """
 function retrieve(repo::Repo)
     path = state_path(repo)
+    pull!(repo)
     if isfile(path)
         data = read(path, String)
         dic = tomlparse(data)
@@ -125,6 +149,7 @@ function update!(repo::Repo, state::State, scans::Vector)
         state.scans[key] = scan
     end
     store!(repo, state)
+    commit!(repo)
     return repo
 end
 
