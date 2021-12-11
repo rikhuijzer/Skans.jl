@@ -16,9 +16,8 @@ using Test
 
     page = Skan.MockPage("url1", "c")
     pagescan = Skan.scan(page)
-    @show pagescan
-    repo = Skan.update!(repo, pagescan)
-    changed_pages = skan!(repo, pages)
+    changed_pages = skan!(repo, [page, pages[2]])
     @test !isempty(changed_pages)
-    # @test repo.state.scans["url1"].content == "c"
+    state = Skan.retrieve(repo)
+    @test state.scans["url1"].content == "c"
 end
