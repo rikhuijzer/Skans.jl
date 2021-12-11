@@ -48,9 +48,8 @@ jobs:
         run: julia --project -e '
           using Skan;
           repo = GitHubRepo();
-          page = WebPage("https://bbc.com"); # Always changes.
-          changed = skan!(repo, page)
-          @show changed
-          '
+          page = WebPage("https://bbc.com");
+          changed = skan!(repo, page);
+          @show changed'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
