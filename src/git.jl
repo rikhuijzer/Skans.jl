@@ -3,6 +3,16 @@ clone_dir(repo) = joinpath(homedir(), repo.dir)
 clone!(repo::MockRepo) = nothing
 clone!(repo::MockFileRepo) = nothing
 
+function clean_repo!(dir)
+    paths = readdir(dir; join=true)
+    for path in paths
+        if !endswith(path, ".git")
+            rm(path; force=true, recursive=true)
+        end
+    end
+    return nothing
+end
+
 function clone!(repo::GitHubRepo)
     user = string(repo.user)
     token = string(repo.token)
@@ -19,7 +29,8 @@ function clone!(repo::GitHubRepo)
         try
             run(`git checkout $branch`)
         catch
-            run(`git checkout -b $branch`)
+            run(`git checkout --orphan $branch`)
+            clean_repo!(dir)
         end
     end
     return dir
