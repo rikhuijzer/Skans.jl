@@ -42,9 +42,4 @@ jobs:
 
       - uses: julia-actions/julia-buildpkg@latest
 
-      - run: julia -e 'using Skan;
-          repo = GitHubRepo();
-          Skan.clone!(repo);
-          @show readdir(repo)'
-
       - uses: julia-actions/julia-runtest@v1
