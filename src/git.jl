@@ -15,7 +15,7 @@ function clone!(repo::GitHubRepo)
         "https://$user:$token@github.com/$repository.git"
     end
     run(`git clone $url $dir`)
-    cd(dir)
+    cd(dir) do
         try
             run(`git checkout $branch`)
         catch
@@ -44,10 +44,12 @@ commit!(repo::MockFileRepo) = nothing
 
 function commit!(repo::Repo)
     dir = clone_dir(repo)
+    branch = repo.branch
     cd(dir) do
         run(`git add .`)
         run(`git commit -m '[Bot] Update stored pages'`)
-        run(`git push`)
+        # Required for first push on new branch.
+        run(`git push --set-upstream origin $branch`)
     end
 end
 
