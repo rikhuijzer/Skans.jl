@@ -19,11 +19,13 @@ function skan!(repo, pages::Vector{<:Page}; send_mail=true)::Vector{PageScan}
         end
     end
     filter!(!isnothing, changed)
+    # Without this, `send_mail!` may get a `Vector{Union{Nothing, Skan.PageScan}}`.
+    filtered = convert(Array{PageScan}, changed)
 
-    update!(repo, state, changed)
+    update!(repo, state, filtered)
 
-    if !isempty(changed) && send_mail
-        send_mail!(changed)
+    if !isempty(filtered) && send_mail
+        send_mail!(filtered)
     end
 
     return changed
