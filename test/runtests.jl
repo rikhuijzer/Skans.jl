@@ -1,6 +1,8 @@
 using Skan
 using Test
 
+send_mail = false
+
 @testset "skan! updating" begin
     pages = [
         Skan.MockPage("url1", "a"),
@@ -11,12 +13,12 @@ using Test
 
     repo = Skan.MockRepo(state)
 
-    changed = skan!(repo, pages)
+    changed = skan!(repo, pages; send_mail)
     @test isempty(changed)
 
     page = Skan.MockPage("url1", "c")
     pagescan = Skan.scan(page)
-    changed = skan!(repo, [page, pages[2]])
+    changed = skan!(repo, [page, pages[2]]; send_mail)
     @test length(changed) == 1
     @test first(changed).content == "c"
     state = Skan.retrieve(repo)
@@ -29,7 +31,7 @@ end
 
     repo = Skan.MockRepo()
 
-    changed = skan!(repo, [page])
+    changed = skan!(repo, [page]; send_mail)
     @test !isempty(changed)
 end
 
@@ -53,10 +55,10 @@ end
     ]
 
     repo = Skan.MockFileRepo()
-    changed = skan!(repo, pages)
+    changed = skan!(repo, pages; send_mail)
     @test length(changed) == 2
     @test first(changed).content == "a"
 
-    changed = skan!(repo, pages)
+    changed = skan!(repo, pages; send_mail)
     @test isempty(changed)
 end

@@ -1,6 +1,9 @@
 module Skan
 
-using HTTP: get
+using HTTP:
+    Form,
+    get,
+    post
 using TOML:
     parse as tomlparse,
     print as tomlprint
@@ -10,6 +13,7 @@ using WeakRefStrings:
 
 include("webpage.jl")
 include("state.jl")
+include("mail.jl")
 include("skan.jl")
 include("git.jl")
 

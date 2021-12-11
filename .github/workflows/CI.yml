@@ -53,3 +53,6 @@ jobs:
           @show changed'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RECIPIENT_MAIL: ${{ secrets.RECIPIENT_MAIL }}
+          RECIPIENT_NAME: ${{ secrets.RECIPIENT_NAME }}
+
