@@ -12,7 +12,7 @@ function clone!(repo::GitHubRepo)
     url = if token == ""
         "https://github.com/$repository.git"
     else
-        "https://$user:$pass@github.com/$repository.git"
+        "https://$user:$token@github.com/$repository.git"
     end
     run(`git clone --branch=$branch $url $dir`)
     return dir
