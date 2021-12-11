@@ -36,7 +36,7 @@ commit!(repo::MockRepo) = nothing
 commit!(repo::MockFileRepo) = nothing
 
 function commit!(repo::Repo)
-    dir = repo.dir
+    dir = clone_dir(repo)
     cd(dir) do
         run(`git add .`)
         run(`git commit -m '[Bot] Update stored pages'`)
