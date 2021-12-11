@@ -24,6 +24,7 @@ function skan!(repo, pages::Vector{<:Page}; send_mail=true)::Vector{PageScan}
 
     if !isempty(changed) && send_mail
         send_mail!(changed)
+
     end
 
     return changed
