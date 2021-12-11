@@ -6,6 +6,7 @@ Return a vector of changed `pages` and update the repo for each changed page.
 When no pages changed, the vector is empty.
 """
 function skan!(repo, pages::Vector{<:Page})::Vector{PageScan}
+    pull_or_clone!(repo)
     state = retrieve(repo)
 
     changed = map(pages) do page

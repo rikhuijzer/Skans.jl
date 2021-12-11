@@ -1,5 +1,8 @@
 clone_dir(repo) = joinpath(homedir(), repo.dir)
 
+clone!(repo::MockRepo) = nothing
+clone!(repo::MockFileRepo) = nothing
+
 function clone!(repo::GitHubRepo)
     user = string(repo.user)
     token = string(repo.token)
@@ -15,9 +18,12 @@ function clone!(repo::GitHubRepo)
     return dir
 end
 
-function pull!(repo::Repo)
+pull_or_clone!(repo::MockFileRepo) = nothing
+pull_or_clone!(repo::MockRepo) = nothing
+
+function pull_or_clone!(repo::Repo)
     dir = repo.dir
-    if isdir(dir)
+    if isdir(dir) && ".git" in readdir(dir)
         cd(dir) do
             run(`git pull`)
         end
@@ -25,6 +31,9 @@ function pull!(repo::Repo)
         clone!(repo)
     end
 end
+
+commit!(repo::MockRepo) = nothing
+commit!(repo::MockFileRepo) = nothing
 
 function commit!(repo::Repo)
     dir = repo.dir

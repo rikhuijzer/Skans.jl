@@ -109,7 +109,6 @@ Return state from `repo`.
 """
 function retrieve(repo::Repo)
     path = state_path(repo)
-    pull!(repo)
     if isfile(path)
         data = read(path, String)
         dic = tomlparse(data)

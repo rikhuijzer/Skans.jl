@@ -40,9 +40,8 @@ end
         repo="githubtraining/hellogitworld",
         branch="master"
     )
-    Skan.clone!(repo)
+    Skan.pull_or_clone!(repo)
     @test !isempty(readdir(repo.dir))
-    Skan.pull!(repo)
 end
 
 @testset "Store and read MockFileRepo" begin
@@ -52,10 +51,10 @@ end
     ]
 
     repo = Skan.MockFileRepo()
-    # changed = skan!(repo, pages)
-    # @test length(changed) == 2
-    # @test first(changed).content == "a"
+    changed = skan!(repo, pages)
+    @test length(changed) == 2
+    @test first(changed).content == "a"
 
-    # changed = skan!(repo, pages)
-    # @test isempty(changed)
+    changed = skan!(repo, pages)
+    @test isempty(changed)
 end
