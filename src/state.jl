@@ -70,14 +70,14 @@ function retrieve(repo::Repo)
     error("Not implemented")
 end
 
-function retrieve(state::State, page::Page)
+function retrieve(state::State, page::Page)::Union{PageScan,Nothing}
     # State could be a dict to speed things up but this is good enough for now.
     dic = state.scans
     key = page.url
     if key in keys(dic)
         return dic[key]
     else
-        error("Couldn't find $key in the state")
+        return nothing
     end
 end
 

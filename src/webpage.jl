@@ -16,7 +16,7 @@ struct WebPage <: Page
     url::String255
     selector::Function
 
-    function Page(url::AbstractString; selector=identity)
+    function WebPage(url::AbstractString; selector=identity)
         return new(String255(url), selector)
     end
 end
@@ -44,8 +44,18 @@ Store scanned `content` of `page`.
 struct PageScan
     page::Page
     content::String
+
+    PageScan(page::Page, content) = new(page, string(content)::String)
 end
 
 function scan(page::MockPage)::PageScan
     return PageScan(page, page.html)
+end
+
+function scan(page::WebPage)::PageScan
+    url = string(page.url)::String
+    response = get(url)
+    content = String(response.body)
+    selection = page.selector(content)
+    return PageScan(page, selection)
 end

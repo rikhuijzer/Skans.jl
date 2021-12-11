@@ -8,14 +8,18 @@ When no pages changed, the vector is empty.
 function skan!(repo, pages::Vector{<:Page})::Vector{PageScan}
     state = retrieve(repo)
 
-    changed_scans = map(pages) do page
-        oldscan = retrieve(state, page)::PageScan
+    changed = map(pages) do page
+        oldscan = retrieve(state, page)::Union{PageScan,Nothing}
         newscan = scan(page)::PageScan
-        return oldscan.content != newscan.content ? newscan : nothing
+        if isnothing(oldscan) || oldscan.content != newscan.content
+            return newscan
+        else
+            return nothing
+        end
     end
-    filter!(!isnothing, changed_scans)
+    filter!(!isnothing, changed)
 
-    update!(repo, changed_scans)
+    update!(repo, changed)
 
-    return changed_scans
+    return changed
 end

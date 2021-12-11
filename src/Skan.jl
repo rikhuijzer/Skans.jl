@@ -7,6 +7,7 @@ include("webpage.jl")
 include("state.jl")
 include("skan.jl")
 
+export WebPage
 export skan!
 
 end # module
