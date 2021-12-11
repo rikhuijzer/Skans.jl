@@ -44,7 +44,7 @@ jobs:
 
       - uses: julia-actions/julia-runtest@v1
 
-      - name: Extra test: update the `skan` branch
+      - name: Extra test (update the `skan` branch)
         run: julia --project -e '
           using Skan;
           repo = GitHubRepo();
