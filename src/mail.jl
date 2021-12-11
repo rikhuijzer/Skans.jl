@@ -42,7 +42,6 @@ function send_mail!(
           ]
         }
         """
-    print(body)
 
     response = post(url, headers, body)
     return response
