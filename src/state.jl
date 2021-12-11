@@ -83,10 +83,8 @@ end
 
 function update!(repo::MockRepo, scan::PageScan)
     key = scan.page.url
-    dic = repo.state.scans
-    dic[key] = scan
-    scans = [dic[k] for k in keys(dic)]
-    return MockRepo(State(scans))
+    repo.state.scans[key] = scan
+    return repo
 end
 
 function update!(repo::Repo, scans::Vector)

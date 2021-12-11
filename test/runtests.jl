@@ -1,7 +1,7 @@
 using Skan
 using Test
 
-@testset "skan" begin
+@testset "skan! updating" begin
     pages = [
         Skan.MockPage("url1", "a"),
         Skan.MockPage("url2", "b")
