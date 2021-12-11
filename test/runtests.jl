@@ -11,13 +11,14 @@ using Test
 
     repo = Skan.MockRepo(state)
 
-    changed_pages = skan!(repo, pages)
-    @test isempty(changed_pages)
+    changed = skan!(repo, pages)
+    @test isempty(changed)
 
     page = Skan.MockPage("url1", "c")
     pagescan = Skan.scan(page)
     changed = skan!(repo, [page, pages[2]])
-    @test !isempty(changed)
+    @test length(changed) == 1
+    @test first(changed).content == "c"
     state = Skan.retrieve(repo)
     @test state.scans["url1"].content == "c"
 end
@@ -26,8 +27,23 @@ end
     url = "http://example.com"
     page = WebPage(url)
 
-    repo = Skan.MockRepo(Skan.State(Skan.PageScan[]))
+    repo = Skan.MockRepo()
 
     changed = skan!(repo, [page])
     @test !isempty(changed)
+end
+
+@testset "Store and read MockFileRepo" begin
+    pages = [
+        Skan.MockPage("url1", "a"),
+        Skan.MockPage("url2", "b")
+    ]
+
+    repo = Skan.MockFileRepo()
+    changed = skan!(repo, pages)
+    @test length(changed) == 2
+    @test first(changed).content == "a"
+
+    changed = skan!(repo, pages)
+    @test isempty(changed)
 end

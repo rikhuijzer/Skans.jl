@@ -19,7 +19,7 @@ function skan!(repo, pages::Vector{<:Page})::Vector{PageScan}
     end
     filter!(!isnothing, changed)
 
-    update!(repo, changed)
+    update!(repo, state, changed)
 
     return changed
 end

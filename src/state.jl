@@ -30,17 +30,22 @@ Of course, a database would be better but repositories are available when runnin
 abstract type Repo end
 
 """
-    MockRepo(state::State; branch="skan") <: Repo
+    MockRepo(state=State(PageScan[])) <: Repo
 
 Mock repository used for testing.
 """
 struct MockRepo <: Repo
     state::State
-    branch::String255
 
-    function MockRepo(state::State; branch="skan")
-        return new(state, String255(branch))
+    function MockRepo(state=State(PageScan[]))
+        return new(state)
     end
+end
+
+struct MockFileRepo <: Repo
+    dir::String
+
+    MockFileRepo(dir=mktempdir()) = new(dir)
 end
 
 """
@@ -57,9 +62,22 @@ struct GitHubRepo <: Repo
     end
 end
 
-store(state::State, repo::MockRepo) = MockRepo(state; branch=repo.branch)
+store!(repo::MockRepo, state::State) = MockRepo(state; branch=repo.branch)
 
-retrieve(repo::MockRepo) = repo.state
+state_path(repo::Repo) = joinpath(repo.dir, "state.toml")
+
+function store!(repo::Repo, state::State)
+    path = state_path(repo)
+    open(path, "w") do io
+        tomlprint(io, state.scans) do x
+            x isa PageScan && return x.content
+            error("unhandled type $(typeof(x))")
+        end
+    end
+    return repo.dir
+end
+
+retrieve(repo::MockRepo)::State = repo.state
 
 """
     retrieve(repo::Repo) -> State
@@ -67,7 +85,15 @@ retrieve(repo::MockRepo) = repo.state
 Return state from `repo`.
 """
 function retrieve(repo::Repo)
-    error("Not implemented")
+    path = state_path(repo)
+    if isfile(path)
+        data = read(path, String)
+        dic = tomlparse(data)
+        scans = [PageScan(WebPage(k), dic[k]) for k in keys(dic)]
+        return State(scans)
+    else
+        return State(PageScan[])
+    end
 end
 
 function retrieve(state::State, page::Page)::Union{PageScan,Nothing}
@@ -81,14 +107,24 @@ function retrieve(state::State, page::Page)::Union{PageScan,Nothing}
     end
 end
 
-function update!(repo::MockRepo, scan::PageScan)
+function update!(repo::MockRepo, state::State, scan::PageScan)
     key = scan.page.url
     repo.state.scans[key] = scan
     return repo
 end
 
-function update!(repo::Repo, scans::Vector)
+function update!(repo::MockRepo, state::State, scans::Vector)
     filter!(!isnothing, scans)
-    foreach(scan -> update!(repo, scan), scans)
+    foreach(scan -> update!(repo, state, scan), scans)
     return repo
 end
+
+function update!(repo::Repo, state::State, scans::Vector)
+    for scan in scans
+        key = scan.page.url
+        state.scans[key] = scan
+    end
+    store!(repo, state)
+    return repo
+end
+
