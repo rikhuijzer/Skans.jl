@@ -49,7 +49,7 @@ jobs:
           using Skan;
           repo = GitHubRepo();
           pages = [WebPage("https://bbc.com"), WebPage("http://example.com")];
-          changed = skan!(repo, [page]);
+          changed = skan!(repo, pages);
           @show changed'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
