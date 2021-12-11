@@ -1,5 +1,7 @@
 # Skan.jl
 
+**<WORK IN PROGRESS.>**
+
 Scan web pages for changes
 
 ## Features

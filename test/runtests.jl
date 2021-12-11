@@ -42,6 +42,8 @@ end
     )
     Skan.pull_or_clone!(repo)
     @test !isempty(readdir(repo.dir))
+    # Second time goes through pull logic.
+    Skan.pull_or_clone!(repo)
 end
 
 @testset "Store and read MockFileRepo" begin
