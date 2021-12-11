@@ -50,11 +50,8 @@ jobs:
           repo = GitHubRepo()
 
           urls = [
-              "https://www.berkshirehathaway.com/reports.html",
-              "https://www.stern.nl/over-stern/investor-relations/press-releases",
-              "https://www.stern.nl/over-stern/investor-relations/jaarverslagen"
+              "https://bbc.com"
           ]
-
           pages = WebPage.(urls)
 
           changed = skan!(repo, pages)
