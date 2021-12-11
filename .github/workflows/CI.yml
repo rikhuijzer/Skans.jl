@@ -44,8 +44,8 @@ jobs:
 
       - uses: julia-actions/julia-runtest@v1
 
-      - name: Extra test (update the `skan` branch)
-        run: julia --project -e '
+      # Extra test (update the `skan` branch)
+      - run: julia --project -e '
           using Skan;
           repo = GitHubRepo();
           page = WebPage("https://bbc.com");
