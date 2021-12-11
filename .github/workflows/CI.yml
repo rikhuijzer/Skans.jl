@@ -48,7 +48,7 @@ jobs:
         run: julia --project -e '
           using Skan;
           repo = GitHubRepo();
-          page = WebPage("https://bbc.com");
+          pages = [WebPage("https://bbc.com"), WebPage("http://example.com")];
           changed = skan!(repo, [page]);
           @show changed'
         env:
