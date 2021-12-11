@@ -14,7 +14,14 @@ function clone!(repo::GitHubRepo)
     else
         "https://$user:$token@github.com/$repository.git"
     end
-    run(`git clone --branch=$branch $url $dir`)
+    run(`git clone $url $dir`)
+    cd(dir)
+        try
+            run(`git checkout $branch`)
+        catch
+            run(`git checkout -b $branch`)
+        end
+    end
     return dir
 end
 
