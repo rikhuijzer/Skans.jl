@@ -28,8 +28,7 @@ jobs:
           repo = GitHubRepo()
           urls = [
               "http://example.com",
-              "https://bbc.com",
-              "https://www.iana.org/"
+              "https://bbc.com"
           ]
           pages = WebPage.(urls)
           skan!(repo, pages)
