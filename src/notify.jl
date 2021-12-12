@@ -1,4 +1,4 @@
-issue_title() = "Skan updates"
+issue_title() = "Skann updates"
 
 function github_headers(repo)
     token = repo.token
@@ -13,7 +13,7 @@ function create_issue!(repo::GitHubRepo)::Int
     url = "https://api.github.com/repos/$repository/issues"
     headers = github_headers(repo)
     body = """
-        This issue is automatically created by [Skan.jl](https://github.com/rikhuijzer/Skan.jl) and receives a new comment when a web page has changed. Skan uses the title to find this issue back, so do not change the title.
+        This issue is automatically created by [Skann.jl](https://github.com/rikhuijzer/Skann.jl) and receives a new comment when a web page has changed. Skann uses the title to find this issue back, so do not change the title.
 
         If you were watching this repository, then you should already be subscribed and, hence, getting notifications for new comments on this issue. If you do not get notifications yet, click on "Subscribe".
         """
@@ -69,7 +69,7 @@ end
 """
     skan_issue_number(repo::GitHubRepo)
 
-Finds the issue created by Skan by selecting the first issue with `issue_title()`.
+Finds the issue created by Skann by selecting the first issue with `issue_title()`.
 """
 function skan_issue_number(repo::GitHubRepo)
     issues = list_issues(repo)
