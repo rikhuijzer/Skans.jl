@@ -53,7 +53,7 @@ end
         user=ENV["GITHUB_ACTOR"],
         token=ENV["GITHUB_TOKEN"],
         repo=ENV["GITHUB_REPOSITORY"],
-        branch="skan"
+        branch="skann"
     )
 
 Assuming that we run on a GitHub Runner, then no extra information is needed.
@@ -73,7 +73,7 @@ struct GitHubRepo <: Repo
             user=ENV["GITHUB_ACTOR"],
             token=ENV["GITHUB_TOKEN"],
             repo=ENV["GITHUB_REPOSITORY"],
-            branch="skan"
+            branch="skann"
         )
         return new(
             dir,

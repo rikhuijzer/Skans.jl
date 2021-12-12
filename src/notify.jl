@@ -41,7 +41,7 @@ function list_issues(repo::GitHubRepo)::Vector{Dict{String,Any}}
     return issues
 end
 
-function skan_issue_number(issues::Vector{Dict{String,Any}})::Int
+function skann_issue_number(issues::Vector{Dict{String,Any}})::Int
     title = issue_title()
     for issue in issues
         if issue["title"] == title
@@ -67,13 +67,13 @@ function md(changed::Vector{PageScan})
 end
 
 """
-    skan_issue_number(repo::GitHubRepo)
+    skann_issue_number(repo::GitHubRepo)
 
 Finds the issue created by Skann by selecting the first issue with `issue_title()`.
 """
-function skan_issue_number(repo::GitHubRepo)
+function skann_issue_number(repo::GitHubRepo)
     issues = list_issues(repo)
-    return skan_issue_number(issues)
+    return skann_issue_number(issues)
 end
 
 function post_issue_comment!(repo::GitHubRepo, num::Int, changed::Vector{PageScan})
@@ -87,7 +87,7 @@ end
 
 function post_issue_comment!(repo::GitHubRepo, changed::Vector{PageScan})
     issues = list_issues(repo)
-    num = skan_issue_number(issues)
+    num = skann_issue_number(issues)
     if num == -1
         num = create_issue!(repo)
     end

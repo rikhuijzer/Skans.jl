@@ -60,8 +60,8 @@ function commit!(repo::Repo)
     branch = repo.branch
     cd(dir) do
         if "CI" in keys(ENV)
-            run(`git config --global user.email "skanbot@example.com"`)
-            run(`git config --global user.name "skanbot"`)
+            run(`git config --global user.email "skannbot@example.com"`)
+            run(`git config --global user.name "skannbot"`)
         end
         if git_unchanged()
             println("Nothing changed")
