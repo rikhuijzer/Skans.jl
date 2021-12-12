@@ -30,14 +30,14 @@ end
 Return a list of issues for `repo`.
 Note that closed issues are ignored.
 """
-function list_issues(repo::GitHubRepo)
+function list_issues(repo::GitHubRepo)::Vector{Dict{String,Any}}
     repository = repo.repo
     url = "https://api.github.com/repos/$repository/issues"
     headers = github_headers(repo)
     response = get(url, headers)
     js = String(response.body)
     parsed = jsonparse(js)::Vector{Any}
-    issues = identity.(parsed)::Vector{Dict{String,Any}}
+    issues = convert(Vector{Dict{String,Any}}, parsed)
     return issues
 end
 
@@ -67,13 +67,13 @@ function md(changed::Vector{PageScan})
 end
 
 """
-    skan_issue(repo::GitHubRepo)
+    skan_issue_number(repo::GitHubRepo)
 
 Finds the issue created by Skan by selecting the first issue with `issue_title()`.
 """
-function skan_issue(repo::GitHubRepo)
+function skan_issue_number(repo::GitHubRepo)
     issues = list_issues(repo)
-    return skan_issue(issues)
+    return skan_issue_number(issues)
 end
 
 function post_issue_comment!(repo::GitHubRepo, num::Int, changed::Vector{PageScan})
