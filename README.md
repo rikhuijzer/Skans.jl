@@ -11,6 +11,15 @@ Monitor web pages and get notified when a page has changed.
 - Run the checks on a schedule (specified via a CRON job; powered by GitHub Actions)
 - Get notified when a page has changed
 
+## Use-cases
+
+Monitor pages for:
+
+- New job offers
+- Updated product pricing
+- New (financial) reports or other news
+- Updates to legislation
+
 ## Example
 
 To check <http://example.com> and <https://bbc.com> for changes, create a new GitHub repository and copy the contents of
