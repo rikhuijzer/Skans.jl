@@ -1,7 +1,7 @@
 name = "Skan"
 uuid = "a745460b-2075-4384-80fc-e13528d5f107"
 authors = ["Rik Huijzer <t.h.huijzer@rug.nl>"]
-version = "0.1.0"
+version = "1.0.0"
 
 [deps]
 HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
