@@ -1,11 +1,11 @@
 """
-    skan!(repo::Repo, pages::Vector{<:Page}; send_mail=true) -> Vector{PageScan}
+    skan!(repo::Repo, pages::Vector{<:Page}; notify=true) -> Vector{PageScan}
 
 Compare the `pages` to the stored state in `repo`.
 Return a vector of changed `pages` and update the repo for each changed page.
 When no pages changed, the vector is empty.
 """
-function skan!(repo, pages::Vector{<:Page}; send_mail=true)::Vector{PageScan}
+function skan!(repo, pages::Vector{<:Page}; notify=true)::Vector{PageScan}
     pull_or_clone!(repo)
     state = retrieve(repo)
 
@@ -24,8 +24,8 @@ function skan!(repo, pages::Vector{<:Page}; send_mail=true)::Vector{PageScan}
 
     update!(repo, state, filtered)
 
-    if !isempty(filtered) && send_mail
-        send_mail!(filtered)
+    if notify && !isempty(filtered)
+        post_issue_comment!(repo, filtered)
     end
 
     return changed

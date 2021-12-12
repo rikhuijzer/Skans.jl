@@ -20,8 +20,6 @@ jobs:
       - shell: julia --color=yes {0}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RECIPIENT_MAIL: ${{ secrets.RECIPIENT_MAIL }}
-          RECIPIENT_NAME: ${{ secrets.RECIPIENT_NAME }}
         run: |
           using Skan
           repo = GitHubRepo()
@@ -31,4 +29,4 @@ jobs:
           ]
           pages = WebPage.(urls)
           changed = skan!(repo, pages)
-          @show changed
+          @show urls(changed)
