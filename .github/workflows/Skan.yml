@@ -24,7 +24,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          using Skann
+          using Skans
           repo = GitHubRepo()
           urls = [
               "http://example.com",
