@@ -2,7 +2,7 @@
 
 **<WORK IN PROGRESS.>**
 
-Scan web pages for changes
+Monitor web pages and get notified when a page has changed.
 
 ## Example
 

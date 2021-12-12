@@ -43,16 +43,3 @@ jobs:
       - uses: julia-actions/julia-buildpkg@latest
 
       - uses: julia-actions/julia-runtest@v1
-
-      - name: Extra test (update the `skan` branch)
-        run: julia --project -e '
-          using Skan;
-          repo = GitHubRepo();
-          pages = [WebPage("https://bbc.com"), WebPage("http://example.com")];
-          changed = skan!(repo, pages);
-          @show changed'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RECIPIENT_MAIL: ${{ secrets.RECIPIENT_MAIL }}
-          RECIPIENT_NAME: ${{ secrets.RECIPIENT_NAME }}
-
