@@ -29,6 +29,7 @@ jobs:
           urls = [
               "http://example.com",
               "https://bbc.com",
+              "https://www.iana.org/"
           ]
           pages = WebPage.(urls)
           skan!(repo, pages)
