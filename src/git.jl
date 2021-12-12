@@ -59,8 +59,10 @@ function commit!(repo::Repo)
     dir = clone_dir(repo)
     branch = repo.branch
     cd(dir) do
-        run(`git config --global user.email "skanbot@example.com"`)
-        run(`git config --global user.name "skanbot"`)
+        if "CI" in keys(ENV)
+            run(`git config --global user.email "skanbot@example.com"`)
+            run(`git config --global user.name "skanbot"`)
+        end
         if git_unchanged()
             println("Nothing changed")
         else
