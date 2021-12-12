@@ -8,7 +8,7 @@ function github_headers(repo)
     ]
 end
 
-function create_issue(repo::GitHubRepo)::Int
+function create_issue!(repo::GitHubRepo)::Int
     repository = repo.repo
     url = "https://api.github.com/repos/$repository/issues"
     headers = github_headers(repo)
@@ -76,7 +76,7 @@ function skan_issue(repo::GitHubRepo)
     return skan_issue(issues)
 end
 
-function post_issue_comment(repo::GitHubRepo, num::Int, changed::Vector{PageScan})
+function post_issue_comment!(repo::GitHubRepo, num::Int, changed::Vector{PageScan})
     repository = repo.repo
     url = "https://api.github.com/repos/$repository/issues/$num/comments"
     headers = github_headers(repo)
@@ -85,11 +85,11 @@ function post_issue_comment(repo::GitHubRepo, num::Int, changed::Vector{PageScan
     return post(url, headers, js)
 end
 
-function post_issue_comment(repo::GitHubRepo, changed::Vector{PageScan})
+function post_issue_comment!(repo::GitHubRepo, changed::Vector{PageScan})
     issues = list_issues(repo)
     num = skan_issue_number(issues)
     if num == -1
-        num = create_issue(repo)
+        num = create_issue!(repo)
     end
-    return post_issue_comment(repo, num, changed)
+    return post_issue_comment!(repo, num, changed)
 end
