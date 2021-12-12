@@ -28,5 +28,4 @@ jobs:
               "https://bbc.com",
           ]
           pages = WebPage.(urls)
-          changed = skan!(repo, pages)
-          @show urls(changed)
+          skan!(repo, pages)
