@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - shell: julia --color=yes {0}
-        run: 'using Pkg; Pkg.add(; url="https://github.com/rikhuijzer/Skan.jl#main")'
+        run: 'using Pkg; Pkg.add(; url="https://github.com/rikhuijzer/Skann.jl#main")'
 
       - shell: julia --color=yes {0}
         env:

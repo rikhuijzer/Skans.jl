@@ -25,7 +25,7 @@ Monitor pages for:
 
 To check <http://example.com> and <https://bbc.com> for changes, create a new GitHub repository and copy the contents of
 
-[.github/workflows/Skan.yml](https://github.com/rikhuijzer/Skan.jl/blob/main/.github/workflows/Skan.yml)
+[.github/workflows/Skann.yml](https://github.com/rikhuijzer/Skann.jl/blob/main/.github/workflows/Skann.yml)
 
 into your own repository.
 

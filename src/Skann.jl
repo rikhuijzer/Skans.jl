@@ -1,4 +1,4 @@
-module Skan
+module Skann
 
 using HTTP:
     Form,
