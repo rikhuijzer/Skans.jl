@@ -1,4 +1,4 @@
-# Skann.jl
+# Skans.jl
 
 Monitor web pages and get notified when a page has changed.
 
@@ -23,10 +23,10 @@ Monitor pages for:
 
 To check <http://example.com> and <https://bbc.com> for changes, create a new GitHub repository and copy the contents of
 
-[.github/workflows/Skann.yml](https://github.com/rikhuijzer/Skann.jl/blob/main/.github/workflows/Skann.yml)
+[.github/workflows/Skan.yml](https://github.com/rikhuijzer/Skans.jl/blob/main/.github/workflows/Skan.yml)
 
 into your own repository.
 
-After doing this, Skann will check the web pages for changes and add an issue comment in your repository every time a page changed.
-The downloaded pages are stored in the `skann` branch of your repository to be able to compare them on the next run.
+After doing this, Skans will check the web pages for changes and add an issue comment in your repository every time a page changed.
+The downloaded pages are stored in the `skan` branch of your repository to be able to compare them on the next run.
 

@@ -1,4 +1,4 @@
-issue_title() = "Skann updates"
+issue_title() = "Skans updates"
 
 function github_headers(repo)
     token = repo.token
@@ -13,7 +13,7 @@ function create_issue!(repo::GitHubRepo)::Int
     url = "https://api.github.com/repos/$repository/issues"
     headers = github_headers(repo)
     body = """
-        This issue is automatically created by [Skann.jl](https://github.com/rikhuijzer/Skann.jl) and receives a new comment when a web page has changed. Skann uses the title to find this issue back, so do not change the title.
+        This issue is automatically created by [Skans.jl](https://github.com/rikhuijzer/Skans.jl) and receives a new comment when a web page has changed. Skans uses the title to find this issue back, so do not change the title.
 
         If you were watching this repository, then you should already be subscribed and, hence, getting notifications for new comments on this issue. If you do not get notifications yet, click on "Subscribe".
         """
@@ -41,7 +41,7 @@ function list_issues(repo::GitHubRepo)::Vector{Dict{String,Any}}
     return issues
 end
 
-function skann_issue_number(issues::Vector{Dict{String,Any}})::Int
+function skans_issue_number(issues::Vector{Dict{String,Any}})::Int
     title = issue_title()
     for issue in issues
         if issue["title"] == title
@@ -67,13 +67,13 @@ function md(changed::Vector{PageScan})
 end
 
 """
-    skann_issue_number(repo::GitHubRepo)
+    skans_issue_number(repo::GitHubRepo)
 
-Finds the issue created by Skann by selecting the first issue with `issue_title()`.
+Finds the issue created by Skans by selecting the first issue with `issue_title()`.
 """
-function skann_issue_number(repo::GitHubRepo)
+function skans_issue_number(repo::GitHubRepo)
     issues = list_issues(repo)
-    return skann_issue_number(issues)
+    return skans_issue_number(issues)
 end
 
 function post_issue_comment!(repo::GitHubRepo, num::Int, changed::Vector{PageScan})
@@ -87,7 +87,7 @@ end
 
 function post_issue_comment!(repo::GitHubRepo, changed::Vector{PageScan})
     issues = list_issues(repo)
-    num = skann_issue_number(issues)
+    num = skans_issue_number(issues)
     if num == -1
         num = create_issue!(repo)
     end

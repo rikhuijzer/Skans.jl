@@ -19,7 +19,7 @@ function skan!(repo, pages::Vector{<:Page}; notify=true)::Vector{PageScan}
         end
     end
     filter!(!isnothing, changed)
-    # Without this, filtered may become a `Vector{Union{Nothing, Skann.PageScan}}`.
+    # Without this, filtered may become a `Vector{Union{Nothing, Skans.PageScan}}`.
     filtered = convert(Array{PageScan}, changed)
 
     update!(repo, state, filtered)

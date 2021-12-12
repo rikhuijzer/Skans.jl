@@ -1,27 +1,27 @@
-using Skann
+using Skans
 using Test
 
 notify = false
 
 @testset "skan! updating" begin
     pages = [
-        Skann.MockPage("url1", "a"),
-        Skann.MockPage("url2", "b")
+        Skans.MockPage("url1", "a"),
+        Skans.MockPage("url2", "b")
     ]
-    scans = Skann.scan.(pages)
-    state = Skann.State(scans)
+    scans = Skans.scan.(pages)
+    state = Skans.State(scans)
 
-    repo = Skann.MockRepo(state)
+    repo = Skans.MockRepo(state)
 
     changed = skan!(repo, pages; notify)
     @test isempty(changed)
 
-    page = Skann.MockPage("url1", "c")
-    pagescan = Skann.scan(page)
+    page = Skans.MockPage("url1", "c")
+    pagescan = Skans.scan(page)
     changed = skan!(repo, [page, pages[2]]; notify)
     @test length(changed) == 1
     @test first(changed).content == "c"
-    state = Skann.retrieve(repo)
+    state = Skans.retrieve(repo)
     @test state.scans["url1"].content == "c"
 end
 
@@ -29,7 +29,7 @@ end
     url = "http://example.com"
     page = WebPage(url)
 
-    repo = Skann.MockRepo()
+    repo = Skans.MockRepo()
 
     changed = skan!(repo, [page]; notify)
     @test !isempty(changed)
@@ -42,19 +42,19 @@ end
         repo="githubtraining/hellogitworld",
         branch="master"
     )
-    Skann.pull_or_clone!(repo)
+    Skans.pull_or_clone!(repo)
     @test !isempty(readdir(repo.dir))
     # Second time goes through pull logic.
-    Skann.pull_or_clone!(repo)
+    Skans.pull_or_clone!(repo)
 end
 
 @testset "Store and read MockFileRepo" begin
     pages = [
-        Skann.MockPage("url1", "a"),
-        Skann.MockPage("url2", "b")
+        Skans.MockPage("url1", "a"),
+        Skans.MockPage("url2", "b")
     ]
 
-    repo = Skann.MockFileRepo()
+    repo = Skans.MockFileRepo()
     changed = skan!(repo, pages; notify)
     @test length(changed) == 2
     @test first(changed).content == "a"
