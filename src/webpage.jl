@@ -48,7 +48,13 @@ struct PageScan
     PageScan(page::Page, content) = new(page, string(content)::String)
 end
 
-urls(scans::AbstractVector{PageScan}) = [scan.page.url for scan in scans]
+function urls(scans::AbstractVector{PageScan})
+    try
+        [scan.page for scan in scans]
+    catch
+        @warn "Couldn't get page for\n$scans"
+    end
+end
 
 function scan(page::MockPage)::PageScan
     return PageScan(page, page.html)
