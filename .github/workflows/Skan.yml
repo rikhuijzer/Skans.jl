@@ -6,6 +6,9 @@ on:
       - main
   pull_request:
   workflow_dispatch:
+  schedule:
+    # Run every day at 16:00.
+    - cron: '00 16 * * *'
 
 jobs:
   skan:
@@ -29,3 +32,4 @@ jobs:
           ]
           pages = WebPage.(urls)
           skan!(repo, pages)
+
