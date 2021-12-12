@@ -1,4 +1,4 @@
-issue_title() = "Skans updates"
+issue_title() = "Skan updates"
 
 function github_headers(repo)
     token = repo.token
