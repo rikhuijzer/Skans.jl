@@ -17,6 +17,12 @@ function pages2state(pages::Vector{<:Skans.Page})
     return Skans.State(scans)
 end
 
+@testset "strip whitespace" begin
+    page = Skans.MockPage("u", "        lorem\n     ipsum")
+    state = pages2state([page])
+    @test state.scans["u"].content == "lorem\nipsum"
+end
+
 @testset "skan! updating" begin
     state = pages2state(PAGES)
 
@@ -78,7 +84,7 @@ end
     @test expected == actual
 
     trouble = raw"userAgent.match(/Firefox[\/\s](\d+\.\d+)/)"
-    page = Skans.MockPage("url1", trouble)
+    page = Skans.MockPage("u", trouble)
     state = pages2state([page])
     # Smoke test.
     tomlparse(Skans.toml(state.scans))
