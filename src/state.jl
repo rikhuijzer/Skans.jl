@@ -101,10 +101,10 @@ function toml(scans::Dict{String,PageScan})::String
     items = map(sorted_keys) do key
         content = scans[key].content
         content = replace(content, TRIPLEQUOTE => "”””")
+
         # Avoid invalid escape characters.
         content = replace(content, '\\' => "\\\\")
-        # Avoid problems when " at start of end of string.
-        content = replace(content, '"' => "\\\"")
+
         "\"$key\" = $TRIPLEQUOTE\n$content$TRIPLEQUOTE"
     end
     return join(items, '\n')
