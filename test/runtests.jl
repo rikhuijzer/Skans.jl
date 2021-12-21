@@ -6,7 +6,7 @@ using Test
 notify = false
 
 const PAGES = [
-    Skans.MockPage("url1", "a"),
+    Skans.MockPage("url1", "a\""),
     Skans.MockPage("url2", "b")
 ]
 
@@ -55,7 +55,7 @@ end
     repo = Skans.MockFileRepo()
     changed = skan!(repo, PAGES; notify)
     @test length(changed) == 2
-    @test first(changed).content == "a"
+    @test first(changed).content == "a\""
 
     changed = skan!(repo, PAGES; notify)
     @test isempty(changed)
@@ -66,7 +66,7 @@ end
     state = Skans.State(scans)
     expected = """
         "url1" = $TRIPLEQUOTE
-        a$TRIPLEQUOTE
+        a\\\"$TRIPLEQUOTE
         "url2" = $TRIPLEQUOTE
         b$TRIPLEQUOTE"""
     actual = Skans.toml(state.scans)
