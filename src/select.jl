@@ -44,4 +44,7 @@ Return cleaned up `content`.
 With this cleaning, there is a lower chance that pages appear to have changed even though there nothing is visually different.
 Specifically, this method removes invisible elements such as the header and script elements.
 """
-clean(content::String) = noscript(body(content))
+function clean(content::String)
+    # Don't turn this around or empty headers and stuff will be added.
+    return body(noscript(content))
+end
