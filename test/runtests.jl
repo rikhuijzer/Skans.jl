@@ -2,6 +2,8 @@ using Skans
 using Skans:
     TRIPLEQUOTE
 using Test
+using TOML:
+    parse as tomlparse
 
 notify = false
 
@@ -10,9 +12,13 @@ const PAGES = [
     Skans.MockPage("url2", "b")
 ]
 
+function pages2state(pages::Vector{<:Skans.Page})
+    scans = Skans.scan.(pages)
+    return Skans.State(scans)
+end
+
 @testset "skan! updating" begin
-    scans = Skans.scan.(PAGES)
-    state = Skans.State(scans)
+    state = pages2state(PAGES)
 
     repo = Skans.MockRepo(state)
 
@@ -62,8 +68,7 @@ end
 end
 
 @testset "Multiline TOML" begin
-    scans = Skans.scan.(PAGES)
-    state = Skans.State(scans)
+    state = pages2state(PAGES)
     expected = """
         "url1" = $TRIPLEQUOTE
         a\\\"$TRIPLEQUOTE
@@ -71,4 +76,10 @@ end
         b$TRIPLEQUOTE"""
     actual = Skans.toml(state.scans)
     @test expected == actual
+
+    trouble = raw"userAgent.match(/Firefox[\/\s](\d+\.\d+)/)"
+    page = Skans.MockPage("url1", trouble)
+    state = pages2state([page])
+    # Smoke test.
+    tomlparse(Skans.toml(state.scans))
 end
