@@ -17,6 +17,10 @@ function pages2state(pages::Vector{<:Skans.Page})
     return Skans.State(scans)
 end
 
+@testset "select body" begin
+    @test body("<html> <body>foo") == "<body>foo</body>"
+end
+
 @testset "strip whitespace" begin
     page = Skans.MockPage("u", "        lorem\n     ipsum")
     state = pages2state([page])
