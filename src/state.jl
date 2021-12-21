@@ -4,7 +4,7 @@
 State of the scans.
 """
 struct State
-    scans::Dict{String255,PageScan}
+    scans::Dict{String,PageScan}
 
     function State(scans::Vector{PageScan})
         urls = [scan.page.url for scan in scans]
@@ -50,6 +50,7 @@ end
 
 """
     GitHubRepo(;
+        dir=mktempdir(),
         user=ENV["GITHUB_ACTOR"],
         token=ENV["GITHUB_TOKEN"],
         repo=ENV["GITHUB_REPOSITORY"],
@@ -63,10 +64,10 @@ For public repositories, set `token` to the empty string `""`.
 """
 struct GitHubRepo <: Repo
     dir::String
-    user::String255 # octocat
-    token::String255
-    repo::String255 # octocat/Hello-World
-    branch::String255
+    user::String # octocat
+    token::String
+    repo::String # octocat/Hello-World
+    branch::String
 
     function GitHubRepo(;
             dir=mktempdir(),
@@ -77,10 +78,10 @@ struct GitHubRepo <: Repo
         )
         return new(
             dir,
-            String255(user),
-            String255(token),
-            String255(repo),
-            String255(branch)
+            string(user)::String,
+            string(token)::String,
+            string(repo)::String,
+            string(branch)::String
         )
     end
 end
@@ -89,14 +90,26 @@ store!(repo::MockRepo, state::State) = MockRepo(state; branch=repo.branch)
 
 state_path(repo::Repo) = joinpath(repo.dir, "state.toml")
 
+"""
+    toml(scans::Dict{String,PageScan})::String
+
+Return `scans` as a valid TOML string.
+Unlike Julia's default TOML printer, this method uses TOML's multiline strings and the ordering of the output is always the same (sorted alphabetically).
+"""
+function toml(scans::Dict{String,PageScan})::String
+    sorted_keys = sort(collect(keys(scans)))
+    items = map(sorted_keys) do key
+        content = scans[key].content
+        content = replace(content, TRIPLEQUOTE => "”””")
+        "\"$key\" = $TRIPLEQUOTE\n$content$TRIPLEQUOTE"
+    end
+    return join(items, '\n')
+end
+
 function store!(repo::Repo, state::State)
     path = state_path(repo)
-    open(path, "w") do io
-        tomlprint(io, state.scans) do x
-            x isa PageScan && return x.content
-            error("unhandled type $(typeof(x))")
-        end
-    end
+    text = toml(state.scans)
+    write(path, text)
     return repo.dir
 end
 
