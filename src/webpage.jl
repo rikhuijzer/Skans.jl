@@ -2,7 +2,7 @@
     Page
 
 Abstract supertype for web pages and mock web pages.
-All Page subtypes are assumed to define a `url::String255`.
+All Page subtypes are assumed to define a `url::String`.
 """
 abstract type Page end
 
@@ -13,11 +13,11 @@ WebPage to be scanned with `url`.
 The `selector` is a function which can be used to scan only a specific region of the page for changes.
 """
 struct WebPage <: Page
-    url::String255
+    url::String
     selector::Function
 
     function WebPage(url::AbstractString; selector=identity)
-        return new(String255(url), selector)
+        return new(string(url)::String, selector)
     end
 end
 
@@ -27,12 +27,12 @@ end
 Mock web page used for testing.
 """
 struct MockPage <: Page
-    url::String255
+    url::String
     html::String
     selector::Function
 
     function MockPage(url::AbstractString, html::String; selector::Function=identity)
-        return new(String255(url), html, selector)
+        return new(string(url)::String, html, selector)
     end
 end
 

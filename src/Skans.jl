@@ -8,11 +8,9 @@ using JSON:
     json,
     parse as jsonparse
 using TOML:
-    parse as tomlparse,
-    print as tomlprint
-using WeakRefStrings:
-    String31,
-    String255
+    parse as tomlparse
+
+const TRIPLEQUOTE = "\"\"\""
 
 include("webpage.jl")
 include("state.jl")
