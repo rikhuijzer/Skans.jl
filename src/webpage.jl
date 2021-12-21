@@ -7,7 +7,7 @@ All Page subtypes are assumed to define a `url::String`.
 abstract type Page end
 
 """
-    WebPage(url::AbstractString; selector::Function=body) <: Page
+    WebPage(url::AbstractString; selector::Function=clean) <: Page
 
 WebPage to be scanned with `url`.
 The `selector` is a function which can be used to scan only a specific region of the page for changes.
@@ -18,7 +18,7 @@ struct WebPage <: Page
     url::String
     selector::Function
 
-    function WebPage(url::AbstractString; selector=body)
+    function WebPage(url::AbstractString; selector=clean)
         return new(string(url)::String, selector)
     end
 end
@@ -33,7 +33,7 @@ struct MockPage <: Page
     html::String
     selector::Function
 
-    function MockPage(url::AbstractString, html::String; selector::Function=body)
+    function MockPage(url::AbstractString, html::String; selector::Function=clean)
         return new(string(url)::String, html, selector)
     end
 end

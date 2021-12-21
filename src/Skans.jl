@@ -1,12 +1,15 @@
 module Skans
 
-using AbstractTrees: PreOrderDFS
+using AbstractTrees:
+    PreOrderDFS,
+    StatelessBFS
 using HTTP:
     Form,
     get,
     post
 using Gumbo:
     HTMLElement,
+    HTMLText,
     parsehtml,
     tag
 using JSON:
@@ -24,7 +27,7 @@ include("git.jl")
 include("notify.jl")
 include("skan.jl")
 
-export body
+export body, noscript, clean
 export WebPage
 export urls
 export GitHubRepo
