@@ -1,22 +1,63 @@
 """
-    filter_tag(content::String, t::Symbol)
+    pretty(doc)
 
-Return a copy of `content`, but without all elements having tag `t`.
+Pretty print the parsed HTML `doc`.
 """
-function filter_tag(content::String, t::Symbol)
-    doc = parsehtml(content)
+function pretty(doc)
+    io = IOBuffer()
+    print(io, doc; pretty=true)
+    return String(take!(io))
+end
+
+function map!(f::Function, doc::HTMLDocument)
     for elem in PreOrderDFS(doc.root)
         if elem isa HTMLElement
+            # Changing elem directly doesn't work, so we loop direct children.
             children = elem.children
             for i in 1:length(children)
-                child = elem.children[i]
-                if child isa HTMLElement && tag(child) == t
-                    elem.children[i] = HTMLText("")
-                end
+                elem.children[i] = f(elem.children[i])
             end
         end
+        # else (isa HTMLText) is handled by the fact that we loop direct children.
     end
-    return string(doc)::String
+    return doc
+end
+
+function without_attributes(elem::HTMLElement{T}) where T
+    children = elem.children
+    parent = elem.parent
+    attributes = Dict{AbstractString,AbstractString}()
+    return HTMLElement{T}(children, parent, attributes)
+end
+
+function without_attributes(elem::HTMLElement{:a})
+    children = elem.children
+    parent = elem.parent
+    attributes = filter(entry -> first(entry) == "href", elem.attributes)
+    return HTMLElement{:a}(children, parent, attributes)
+end
+
+function contains_title_description(entry)
+    text = string(entry)::String
+    return contains(text, r"title|description")
+end
+
+function without_attributes(elem::HTMLElement{:meta})
+    children = elem.children
+    parent = elem.parent
+    A = elem.attributes
+    K = keys(A)
+    if !any(contains_title_description(A))
+        A = Dict{AbstractString,AbstractString}()
+    end
+    return HTMLElement{:meta}(children, parent, A)
+end
+
+clean_tree(elem::HTMLElement) = without_attributes(elem)
+
+function clean_tree(elem::HTMLText)
+    @show elem
+    return elem
 end
 
 """
@@ -35,16 +76,19 @@ function body(content::String)
     return content
 end
 
-noscript(content::String) = filter_tag(content, :script)
-
 """
     clean(content::String)
 
-Return cleaned up `content`.
-With this cleaning, there is a lower chance that pages appear to have changed even though there nothing is visually different.
-Specifically, this method removes invisible elements such as the header and script elements.
+Return only the parts of the HTML which are visible in the rendered page.
+This assumes that a page has changed when a reader can see a change, which seems like a reasonable assumption.
+Note that this assumption may be violated when a elements are updated on the fly via Javascript.
 """
 function clean(content::String)
-    # Don't turn this around or empty headers and stuff will be added.
-    return body(noscript(content))
+    doc = parsehtml(content)
+    map!(clean_tree, doc)
+    text = pretty(doc)
+    return """
+        <!-- This HTML document was cleaned up (simplified) by `Skans.clean`. -->
+        $text
+        """
 end
