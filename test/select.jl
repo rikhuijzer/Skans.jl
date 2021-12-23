@@ -14,6 +14,9 @@
             <meta property="og:title" content="Home" />
 
             <meta property="og:description" content="description" />
+            <style>
+            body { margin: 0; }
+            </style>
 
             <meta name="twitter:title" content="Home" />
 
@@ -51,6 +54,7 @@
             </title>
             <meta content="Home" property="og:title"/>
             <meta content="description" property="og:description"/>
+            <style>    </style>
             <meta content="Home" name="twitter:title"/>
             <script></script>
           </head>
@@ -82,7 +86,7 @@
 
     println("expected:")
     print(expected)
-
+    println()
     println("actual:")
     print(actual)
     println()

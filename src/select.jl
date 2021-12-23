@@ -23,18 +23,25 @@ function map!(f::Function, doc::HTMLDocument)
     return doc
 end
 
-function without_attributes(elem::HTMLElement{T}) where T
+function clean(elem::HTMLElement{T}) where T
     children = elem.children
     parent = elem.parent
     attributes = Dict{AbstractString,AbstractString}()
     return HTMLElement{T}(children, parent, attributes)
 end
 
-function without_attributes(elem::HTMLElement{:a})
+function clean(elem::HTMLElement{:a})
     children = elem.children
     parent = elem.parent
     attributes = filter(entry -> first(entry) == "href", elem.attributes)
     return HTMLElement{:a}(children, parent, attributes)
+end
+
+function clean(elem::HTMLElement{:style})
+    children = [HTMLText("")]
+    parent = elem.parent
+    attributes = Dict{AbstractString,AbstractString}()
+    return HTMLElement{:style}(children, parent, attributes)
 end
 
 function contains_title_description(entry)
@@ -42,7 +49,7 @@ function contains_title_description(entry)
     return contains(text, r"title|description")
 end
 
-function without_attributes(elem::HTMLElement{:meta})
+function clean(elem::HTMLElement{:meta})
     children = elem.children
     parent = elem.parent
     A = elem.attributes
@@ -53,10 +60,11 @@ function without_attributes(elem::HTMLElement{:meta})
     return HTMLElement{:meta}(children, parent, A)
 end
 
-clean_tree(elem::HTMLElement) = without_attributes(elem)
+function clean_tree(elem::HTMLElement)
+    return clean(elem)
+end
 
 function clean_tree(elem::HTMLText)
-    @show elem
     return elem
 end
 
