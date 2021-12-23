@@ -20,12 +20,6 @@ end
 
 include("select.jl")
 
-@testset "strip whitespace" begin
-    page = Skans.MockPage("u", "        lorem\n     ipsum")
-    state = pages2state([page])
-    @test state.scans["u"].content == "lorem\nipsum"
-end
-
 @testset "skan! updating" begin
     state = pages2state(PAGES)
 

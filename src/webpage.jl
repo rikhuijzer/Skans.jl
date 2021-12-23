@@ -38,13 +38,6 @@ struct MockPage <: Page
     end
 end
 
-function strip_whitespace(content::AbstractString)::String
-    sep = '\n'
-    lines = split(string(content)::String, sep)
-    stripped = strip.(lines)
-    return join(stripped, sep)
-end
-
 """
     PageScan(page::Page, content::String)
 
@@ -55,7 +48,7 @@ struct PageScan
     content::String
 
     function PageScan(page::Page, content)
-        return new(page, strip_whitespace(content))
+        return new(page, string(content)::String)
     end
 end
 
