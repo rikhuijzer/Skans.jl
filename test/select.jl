@@ -21,6 +21,7 @@
             <meta name="twitter:title" content="Home" />
 
             <script defer type="text/javascript" src="lorem" id="ipsum"></script>
+            <script>function foo() {}</script>
         </head>
         <body>
             <header>
@@ -54,8 +55,9 @@
             </title>
             <meta content="Home" property="og:title"/>
             <meta content="description" property="og:description"/>
-            <style>    </style>
+            <style></style>
             <meta content="Home" name="twitter:title"/>
+            <script></script>
             <script></script>
           </head>
           <body>

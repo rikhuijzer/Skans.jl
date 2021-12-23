@@ -37,11 +37,11 @@ function clean(elem::HTMLElement{:a})
     return HTMLElement{:a}(children, parent, attributes)
 end
 
-function clean(elem::HTMLElement{:style})
-    children = [HTMLText("")]
+function clean(elem::T) where T<:Union{HTMLElement{:style},HTMLElement{:script}}
+    children = []
     parent = elem.parent
     attributes = Dict{AbstractString,AbstractString}()
-    return HTMLElement{:style}(children, parent, attributes)
+    return T(children, parent, attributes)
 end
 
 function contains_title_description(entry)
