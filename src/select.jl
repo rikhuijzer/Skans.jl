@@ -40,9 +40,9 @@ noscript(content::String) = filter_tag(content, :script)
 """
     clean(content::String)
 
-Return cleaned up `content`.
-With this cleaning, there is a lower chance that pages appear to have changed even though there nothing is visually different.
-Specifically, this method removes invisible elements such as the header and script elements.
+Return only the parts of the HTML which are visible in the rendered page.
+This assumes that a page has changed when a reader can see a change, which seems like a reasonable assumption.
+Note that this assumption may be violated when a elements are updated on the fly via Javascript.
 """
 function clean(content::String)
     # Don't turn this around or empty headers and stuff will be added.
