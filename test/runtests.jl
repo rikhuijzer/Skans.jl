@@ -1,6 +1,7 @@
 using Skans
 using Skans:
     TRIPLEQUOTE
+using Gumbo: parsehtml
 using Test
 using TOML:
     parse as tomlparse

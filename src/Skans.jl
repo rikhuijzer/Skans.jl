@@ -1,5 +1,7 @@
 module Skans
 
+import Base: map!
+
 using AbstractTrees:
     PreOrderDFS,
     StatelessBFS
@@ -8,6 +10,7 @@ using HTTP:
     get,
     post
 using Gumbo:
+    HTMLDocument,
     HTMLElement,
     HTMLText,
     parsehtml,
@@ -27,7 +30,7 @@ include("git.jl")
 include("notify.jl")
 include("skan.jl")
 
-export body, noscript, clean
+export body, clean
 export WebPage
 export urls
 export GitHubRepo
