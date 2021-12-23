@@ -8,7 +8,7 @@
     <meta/>
     <meta/>
     <meta/>
-    <style>    </style>
+    <style></style>
   </head>
   <body>
     <div>
@@ -40,10 +40,7 @@
     <title>
       BBC - Homepage
     </title>
-    <script>
-            window.orb_fig_blocking = true;
-            window.bbcredirection = {geo: true};
-            </script>
+    <script></script>
     <meta/>
     <meta/>
     <meta/>
@@ -56,262 +53,31 @@
     <meta/>
     <link/>
     <meta/>
-    <style>    </style>
+    <style></style>
     <script></script>
     <link/>
     <script></script>
-    <script>
-        // nav-orbit-pollyfills
-        // Promise polyfill from https://github.com/bramstein/promis
-        (function(){'use strict';var f,g=[];function l(a){g.push(a);1==g.length&&f()}function m(){for(;g.length;)g[0](),g.shift()}f=function(){setTimeout(m)};function n(a){this.a=p;this.b=void 0;this.f=[];var b=this;try{a(function(a){q(b,a)},function(a){r(b,a)})}catch(c){r(b,c)}}var p=2;function t(a){return new n(function(b,c){c(a)})}function u(a){return new n(function(b){b(a)})}function q(a,b){if(a.a==p){if(b==a)throw new TypeError;var c=!1;try{var d=b&&b.then;if(null!=b&&"object"==typeof b&&"function"==typeof d){d.call(b,function(b){c||q(a,b);c=!0},function(b){c||r(a,b);c=!0});return}}catch(e){c||r(a,e);return}a.a=0;a.b=b;v(a)}} function r(a,b){if(a.a==p){if(b==a)throw new TypeError;a.a=1;a.b=b;v(a)}}function v(a){l(function(){if(a.a!=p)for(;a.f.length;){var b=a.f.shift(),c=b[0],d=b[1],e=b[2],b=b[3];try{0==a.a?"function"==typeof c?e(c.call(void 0,a.b)):e(a.b):1==a.a&&("function"==typeof d?e(d.call(void 0,a.b)):b(a.b))}catch(h){b(h)}}})}n.prototype.g=function(a){return this.c(void 0,a)};n.prototype.c=function(a,b){var c=this;return new n(function(d,e){c.f.push([a,b,d,e]);v(c)})}; function w(a){return new n(function(b,c){function d(c){return function(d){h[c]=d;e+=1;e==a.length&&b(h)}}var e=0,h=[];0==a.length&&b(h);for(var k=0;k<a.length;k+=1)u(a[k]).c(d(k),c)})}function x(a){return new n(function(b,c){for(var d=0;d<a.length;d+=1)u(a[d]).c(b,c)})};window.Promise||(window.Promise=n,window.Promise.resolve=u,window.Promise.reject=t,window.Promise.race=x,window.Promise.all=w,window.Promise.prototype.then=n.prototype.c,window.Promise.prototype["catch"]=n.prototype.g);}());
-    
-    
-        // Polyfill Event constructor for IE ref: ORBITEN-919
-        // see: https://stackoverflow.com/questions/26596123
-        (function () {
-          if (typeof window.CustomEvent === "function") {
-            return false;
-          }
-          function CustomEvent(event, params) {
-            params = params || { bubbles: false, cancelable: false, detail: undefined };
-            var evt = document.createEvent('CustomEvent');
-            evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
-            return evt;
-          }
-          CustomEvent.prototype = window.Event.prototype;
-          window.Event = CustomEvent;
-        })();
-    
-    
-        //Element.prototype.matches polyfill
-        //from https://developer.mozilla.org/en-US/docs/Web/API/Element/matches#Polyfill
-        if (!Element.prototype.matches) {
-          Element.prototype.matches = Element.prototype.msMatchesSelector ||
-                                      Element.prototype.webkitMatchesSelector;
-        }
-        //NodeList.forEach Polyfill
-        //from https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach#Polyfill
-        if (window.NodeList && !NodeList.prototype.forEach) {
-          NodeList.prototype.forEach = Array.prototype.forEach;
-        }
-    
-        // Object.assign polyfill from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign#Polyfill
-        if (typeof Object.assign != 'function') {
-          // Must be writable: true, enumerable: false, configurable: true
-          Object.defineProperty(Object, "assign", {
-            value: function assign(target, varArgs) { // .length of function is 2
-              'use strict';
-              if (target == null) { // TypeError if undefined or null
-                throw new TypeError('Cannot convert undefined or null to object');
-              }
-    
-              var to = Object(target);
-    
-              for (var index = 1; index < arguments.length; index++) {
-                var nextSource = arguments[index];
-    
-                if (nextSource != null) { // Skip over if undefined or null
-                  for (var nextKey in nextSource) {
-                    // Avoid bugs when hasOwnProperty is shadowed
-                    if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
-                      to[nextKey] = nextSource[nextKey];
-                    }
-                  }
-                }
-              }
-              return to;
-            },
-            writable: true,
-            configurable: true
-          });
-        }
-    
-        // window.fetch polyfill https://github.com/github/fetch/blob/v0.11.0/fetch.js - chosen for IE9 compatibility
-        if(typeof window.fetch !== 'function') {
-          (function(self){"use strict";if(self.fetch){return}function normalizeName(name){if(typeof name!=="string"){name=String(name)}if(/[^a-z0-9\\-#$%&'*+.\\^_`|~]/i.test(name)){throw new TypeError("Invalid character in header field name")}return name.toLowerCase()}function normalizeValue(value){if(typeof value!=="string"){value=String(value)}return value}function Headers(headers){this.map={};if(headers instanceof Headers){headers.forEach(function(value,name){this.append(name,value)},this)}else if(headers){Object.getOwnPropertyNames(headers).forEach(function(name){this.append(name,headers[name])},this)}}Headers.prototype.append=function(name,value){name=normalizeName(name);value=normalizeValue(value);var list=this.map[name];if(!list){list=[];this.map[name]=list}list.push(value)};Headers.prototype["delete"]=function(name){delete this.map[normalizeName(name)]};Headers.prototype.get=function(name){var values=this.map[normalizeName(name)];return values?values[0]:null};Headers.prototype.getAll=function(name){return this.map[normalizeName(name)]||[]};Headers.prototype.has=function(name){return this.map.hasOwnProperty(normalizeName(name))};Headers.prototype.set=function(name,value){this.map[normalizeName(name)]=[normalizeValue(value)]};Headers.prototype.forEach=function(callback,thisArg){Object.getOwnPropertyNames(this.map).forEach(function(name){this.map[name].forEach(function(value){callback.call(thisArg,value,name,this)},this)},this)};function consumed(body){if(body.bodyUsed){return Promise.reject(new TypeError("Already read"))}body.bodyUsed=true}function fileReaderReady(reader){return new Promise(function(resolve,reject){reader.onload=function(){resolve(reader.result)};reader.onerror=function(){reject(reader.error)}})}function readBlobAsArrayBuffer(blob){var reader=new FileReader;reader.readAsArrayBuffer(blob);return fileReaderReady(reader)}function readBlobAsText(blob){var reader=new FileReader;reader.readAsText(blob);return fileReaderReady(reader)}var support={blob:"FileReader"in self&&"Blob"in self&&function(){try{new Blob;return true}catch(e){return false}}(),formData:"FormData"in self,arrayBuffer:"ArrayBuffer"in self};function Body(){this.bodyUsed=false;this._initBody=function(body){this._bodyInit=body;if(typeof body==="string"){this._bodyText=body}else if(support.blob&&Blob.prototype.isPrototypeOf(body)){this._bodyBlob=body}else if(support.formData&&FormData.prototype.isPrototypeOf(body)){this._bodyFormData=body}else if(!body){this._bodyText=""}else if(support.arrayBuffer&&ArrayBuffer.prototype.isPrototypeOf(body)){}else{throw new Error("unsupported BodyInit type")}if(!this.headers.get("content-type")){if(typeof body==="string"){this.headers.set("content-type","text/plain;charset=UTF-8")}else if(this._bodyBlob&&this._bodyBlob.type){this.headers.set("content-type",this._bodyBlob.type)}}};if(support.blob){this.blob=function(){var rejected=consumed(this);if(rejected){return rejected}if(this._bodyBlob){return Promise.resolve(this._bodyBlob)}else if(this._bodyFormData){throw new Error("could not read FormData body as blob")}else{return Promise.resolve(new Blob([this._bodyText]))}};this.arrayBuffer=function(){return this.blob().then(readBlobAsArrayBuffer)};this.text=function(){var rejected=consumed(this);if(rejected){return rejected}if(this._bodyBlob){return readBlobAsText(this._bodyBlob)}else if(this._bodyFormData){throw new Error("could not read FormData body as text")}else{return Promise.resolve(this._bodyText)}}}else{this.text=function(){var rejected=consumed(this);return rejected?rejected:Promise.resolve(this._bodyText)}}if(support.formData){this.formData=function(){return this.text().then(decode)}}this.json=function(){return this.text().then(JSON.parse)};return this}var methods=["DELETE","GET","HEAD","OPTIONS","POST","PUT"];function normalizeMethod(method){var upcased=method.toUpperCase();return methods.indexOf(upcased)>-1?upcased:method}function Request(input,options){options=options||{};var body=options.body;if(Request.prototype.isPrototypeOf(input)){if(input.bodyUsed){throw new TypeError("Already read")}this.url=input.url;this.credentials=input.credentials;if(!options.headers){this.headers=new Headers(input.headers)}this.method=input.method;this.mode=input.mode;if(!body){body=input._bodyInit;input.bodyUsed=true}}else{this.url=input}this.credentials=options.credentials||this.credentials||"omit";if(options.headers||!this.headers){this.headers=new Headers(options.headers)}this.method=normalizeMethod(options.method||this.method||"GET");this.mode=options.mode||this.mode||null;this.referrer=null;if((this.method==="GET"||this.method==="HEAD")&&body){throw new TypeError("Body not allowed for GET or HEAD requests")}this._initBody(body)}Request.prototype.clone=function(){return new Request(this)};function decode(body){var form=new FormData;body.trim().split("&").forEach(function(bytes){if(bytes){var split=bytes.split("=");var name=split.shift().replace(/\\+/g," ");var value=split.join("=").replace(/\\+/g," ");form.append(decodeURIComponent(name),decodeURIComponent(value))}});return form}function headers(xhr){var head=new Headers;var pairs=xhr.getAllResponseHeaders().trim().split("\\n");pairs.forEach(function(header){var split=header.trim().split(":");var key=split.shift().trim();var value=split.join(":").trim();head.append(key,value)});return head}Body.call(Request.prototype);function Response(bodyInit,options){if(!options){options={}}this.type="default";this.status=options.status;this.ok=this.status>=200&&this.status<300;this.statusText=options.statusText;this.headers=options.headers instanceof Headers?options.headers:new Headers(options.headers);this.url=options.url||"";this._initBody(bodyInit)}Body.call(Response.prototype);Response.prototype.clone=function(){return new Response(this._bodyInit,{status:this.status,statusText:this.statusText,headers:new Headers(this.headers),url:this.url})};Response.error=function(){var response=new Response(null,{status:0,statusText:""});response.type="error";return response};var redirectStatuses=[301,302,303,307,308];Response.redirect=function(url,status){if(redirectStatuses.indexOf(status)===-1){throw new RangeError("Invalid status code")}return new Response(null,{status:status,headers:{location:url}})};self.Headers=Headers;self.Request=Request;self.Response=Response;self.fetch=function(input,init){return new Promise(function(resolve,reject){var request;if(Request.prototype.isPrototypeOf(input)&&!init){request=input}else{request=new Request(input,init)}var xhr=new XMLHttpRequest;function responseURL(){if("responseURL"in xhr){return xhr.responseURL}if(/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())){return xhr.getResponseHeader("X-Request-URL")}return}xhr.onload=function(){var status=xhr.status===1223?204:xhr.status;if(status<100||status>599){reject(new TypeError("Network request failed"));return}var options={status:status,statusText:xhr.statusText,headers:headers(xhr),url:responseURL()};var body="response"in xhr?xhr.response:xhr.responseText;resolve(new Response(body,options))};xhr.onerror=function(){reject(new TypeError("Network request failed"))};xhr.open(request.method,request.url,true);if(request.credentials==="include"){xhr.withCredentials=true}if("responseType"in xhr&&support.blob){xhr.responseType="blob"}request.headers.forEach(function(value,name){xhr.setRequestHeader(name,value)});xhr.send(typeof request._bodyInit==="undefined"?null:request._bodyInit)})};self.fetch.polyfill=true})(typeof self!=="undefined"?self:this);
-        }
-    
-        if (typeof window.CustomEvent !== 'function') {
-    
-          function CustomEvent(event, params) {
-            params = params || { bubbles: false, cancelable: false, detail: null };
-            var evt = document.createEvent('CustomEvent');
-            evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
-            return evt;
-          }
-    
-          CustomEvent.prototype = window.Event.prototype;
-    
-          window.CustomEvent = CustomEvent;
-    
-        }
-        </script>
-    <script>
-    window.orbitData = {};
-
-    var additionalPageProperties = {};
-        additionalPageProperties['custom_var_1'] = 'us' || null;
-        additionalPageProperties['custom_var_9'] = '1' || null;
-
-    window.orbitData.userProfileUrl = "https://www.bbc.co.uk/userprofile";
-
-    window.page = {
-        name: 'home.page' || null,
-        destination: 'HOMEPAGE_GNL' || null,
-        producer: 'GNL_HOMEPAGE' || null,
-        section: '' || null,
-        site: '' || null,
-        contentId: '' || null,
-        contentType: 'Index-home' || null,
-        edition: '' || null,
-        additionalProperties: additionalPageProperties
-    };
-    window.page.language = 'en';
-    window.page.language = 'en';
-
-    window.page.modal = false;
-
-
-    !function(){var t={53:function(t,e,r){function n(t,e){var r=Object.keys(t);if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(t);e&&(n=n.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),r.push.apply(r,n)}return r}function o(t){for(var e=1;e<arguments.length;e++){var r=null!=arguments[e]?arguments[e]:{};e%2?n(Object(r),!0).forEach((function(e){i(t,e,r[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(r)):n(Object(r)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(r,e))}))}return t}function i(t,e,r){return e in t?Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):t[e]=r,t}var c=r(391),u=r(135);window.bbcpage=c.init(o({},window.page)),window.page=void 0,window.bbcuser=u.init(window,o({},window.user))},391:function(t){function e(t,e){var r=Object.keys(t);if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(t);e&&(n=n.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),r.push.apply(r,n)}return r}function r(t){for(var r=1;r<arguments.length;r++){var o=null!=arguments[r]?arguments[r]:{};r%2?e(Object(o),!0).forEach((function(e){n(t,e,o[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(o)):e(Object(o)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(o,e))}))}return t}function n(t,e,r){return e in t?Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):t[e]=r,t}t.exports={init:function(t){var e=r({},t);return document.addEventListener("bbc-page-reset",(function(t){var r;t.detail&&t.detail.page&&(r=t.detail.page,e=Object.assign(e,r)),document.dispatchEvent(new Event("bbc-page-updated"))})),{getName:function(){return Promise.resolve(e.name||function(){if("file:"===window.location.protocol)return"local.file";var t=window.location.pathname.replace(/\\/$/,"").replace(/^\\//,"").replace(/\\//g,".");return"".concat(t,".page")}())},getLanguage:function(){return Promise.resolve(e.language)},getDestination:function(){return Promise.resolve(e.destination)},getProducer:function(){return Promise.resolve(e.producer)},getSection:function(){return Promise.resolve(e.section)},getContentType:function(){return Promise.resolve(e.contentType)},getContentId:function(){return Promise.resolve(e.contentId)},getReferrer:function(){return Promise.resolve(window.orb&&null!==window.orb.referrer&&void 0!==window.orb.referrer?window.orb.referrer:document.referrer)},getAdditionalProperties:function(){return Promise.resolve(r({},e.additionalProperties))},loadCSS:function(t){return new Promise((function(e,r){var n=document.createElement("link");n.type="text/css",n.rel="stylesheet",n.onload=function(){e()},n.href=t,document.getElementsByTagName("head")[0].appendChild(n)}))},isModal:function(){return Promise.resolve(e.modal)}}}}},135:function(t){function e(t){return(e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t})(t)}function r(t,e){var r=Object.keys(t);if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(t);e&&(n=n.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),r.push.apply(r,n)}return r}function n(t){for(var e=1;e<arguments.length;e++){var n=null!=arguments[e]?arguments[e]:{};e%2?r(Object(n),!0).forEach((function(e){o(t,e,n[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(n)):r(Object(n)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(n,e))}))}return t}function o(t,e,r){return e in t?Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):t[e]=r,t}function i(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function c(t,r){if(r&&("object"===e(r)||"function"==typeof r))return r;if(void 0!==r)throw new TypeError("Derived constructors may only return object or undefined");return function(t){if(void 0===t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return t}(t)}function u(t){var e="function"==typeof Map?new Map:void 0;return(u=function(t){if(null===t||(r=t,-1===Function.toString.call(r).indexOf("[native code]")))return t;var r;if("function"!=typeof t)throw new TypeError("Super expression must either be null or a function");if(void 0!==e){if(e.has(t))return e.get(t);e.set(t,n)}function n(){return a(t,arguments,l(this).constructor)}return n.prototype=Object.create(t.prototype,{constructor:{value:n,enumerable:!1,writable:!0,configurable:!0}}),s(n,t)})(t)}function a(t,e,r){return(a=f()?Reflect.construct:function(t,e,r){var n=[null];n.push.apply(n,e);var o=new(Function.bind.apply(t,n));return r&&s(o,r.prototype),o}).apply(null,arguments)}function f(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],(function(){}))),!0}catch(t){return!1}}function s(t,e){return(s=Object.setPrototypeOf||function(t,e){return t.__proto__=e,t})(t,e)}function l(t){return(l=Object.setPrototypeOf?Object.getPrototypeOf:function(t){return t.__proto__||Object.getPrototypeOf(t)})(t)}var p=function(t){!function(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function");t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,writable:!0,configurable:!0}}),e&&s(t,e)}(o,t);var e,r,n=(e=o,r=f(),function(){var t,n=l(e);if(r){var o=l(this).constructor;t=Reflect.construct(n,arguments,o)}else t=n.apply(this,arguments);return c(this,t)});function o(){return i(this,o),n.apply(this,arguments)}return o}(u(Error));function h(t){return new Promise((function(e,r){window.require(t,(function(){e.apply(this,arguments)}),(function(t){r(t)}))}))}t.exports={init:function(t,e){var r,o=n({},e),i=null;function c(){if(["X-Country","X-Ip_is_advertise_combined","X-Ip_is_uk_combined"].every((function(t){return!!o[t]})))return Promise.resolve(o);if(!i){var e=t.location.hostname.endsWith(".com")?"com":"co.uk";i=t.fetch("https://www.bbc.".concat(e,"/userinfo")).then((function(t){return t.json()}))}return i}function u(t){if(t.status>=200&&t.status<300)return t;var e=new Error(t.statusText);throw e.response=t,e}function a(t){return t.json()}function f(){if(o.ageBand)return Promise.resolve(o);if(!r){if("undefined"==typeof XMLHttpRequest||!("withCredentials"in new XMLHttpRequest))return Promise.resolve(o);r=h(["idcta-v2/idcta-1"]).then((function(e){return e.initiateTokenRefresh().then((function(){return t.fetch(t.orbitData.userProfileUrl,{credentials:"include"}).then(u).then(a).then((function(t){return o=n(n({},o),t)}))}))}))}return r}var s={getHashedId:function(){return h(["idcta-v2/idcta-1"]).then((function(t){return t.getCookieInstance().getHidFromCookie()}))},isSignedIn:function(){return h(["idcta-v2/idcta-1"]).then((function(t){return t&&t.getCookieInstance().hasCookie()}))},getCountry:function(){return c().then((function(t){return t["X-Country"]||"gb"}))},isUKCombined:function(){return c().then((function(t){if(!t["X-Ip_is_uk_combined"])throw new p("missing isUKCombined from userinfo response");return"yes"===t["X-Ip_is_uk_combined"].toLowerCase()}))},canSeeAdverts:function(){return c().then((function(t){if(!t["X-Ip_is_advertise_combined"])throw new p("missing canSeeAdverts from userinfo response");return"yes"===t["X-Ip_is_advertise_combined"].toLowerCase()}))},getAgeBand:function(){return c().then((function(t){return t["X-Age-Band"]?Promise.resolve(t["X-Age-Band"]):s.isSignedIn().then((function(t){if(t)return f().then((function(t){return o["X-Age-Band"]=t["X-Age-Band"],o["X-Age-Band"]||void 0})).catch((function(){return o["X-Age-Band"]||void 0}))}))}))},allowsPerformanceCookies:function(){return h(["orb/cookies"]).then((function(t){return!!t.cookiesEnabled()&&!!t.readPolicy("performance")}))},allowsFunctionalCookies:function(){return h(["orb/cookies"]).then((function(t){return!!t.cookiesEnabled()&&!!t.readPolicy("personalisation")}))},getCookieValue:function(t){return h(["orb/cookies"]).then((function(e){return e.get(t)}))}};return s},BBCUserError:p}},666:function(t){var e=function(t){"use strict";var e,r=Object.prototype,n=r.hasOwnProperty,o="function"==typeof Symbol?Symbol:{},i=o.iterator||"@@iterator",c=o.asyncIterator||"@@asyncIterator",u=o.toStringTag||"@@toStringTag";function a(t,e,r){return Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}),t[e]}try{a({},"")}catch(t){a=function(t,e,r){return t[e]=r}}function f(t,e,r,n){var o=e&&e.prototype instanceof v?e:v,i=Object.create(o.prototype),c=new k(n||[]);return i._invoke=function(t,e,r){var n=l;return function(o,i){if(n===h)throw new Error("Generator is already running");if(n===y){if("throw"===o)throw i;return C()}for(r.method=o,r.arg=i;;){var c=r.delegate;if(c){var u=_(c,r);if(u){if(u===d)continue;return u}}if("next"===r.method)r.sent=r._sent=r.arg;else if("throw"===r.method){if(n===l)throw n=y,r.arg;r.dispatchException(r.arg)}else"return"===r.method&&r.abrupt("return",r.arg);n=h;var a=s(t,e,r);if("normal"===a.type){if(n=r.done?y:p,a.arg===d)continue;return{value:a.arg,done:r.done}}"throw"===a.type&&(n=y,r.method="throw",r.arg=a.arg)}}}(t,r,c),i}function s(t,e,r){try{return{type:"normal",arg:t.call(e,r)}}catch(t){return{type:"throw",arg:t}}}t.wrap=f;var l="suspendedStart",p="suspendedYield",h="executing",y="completed",d={};function v(){}function g(){}function b(){}var w={};w[i]=function(){return this};var m=Object.getPrototypeOf,O=m&&m(m(S([])));O&&O!==r&&n.call(O,i)&&(w=O);var P=b.prototype=v.prototype=Object.create(w);function j(t){["next","throw","return"].forEach((function(e){a(t,e,(function(t){return this._invoke(e,t)}))}))}function E(t,e){function r(o,i,c,u){var a=s(t[o],t,i);if("throw"!==a.type){var f=a.arg,l=f.value;return l&&"object"==typeof l&&n.call(l,"__await")?e.resolve(l.__await).then((function(t){r("next",t,c,u)}),(function(t){r("throw",t,c,u)})):e.resolve(l).then((function(t){f.value=t,c(f)}),(function(t){return r("throw",t,c,u)}))}u(a.arg)}var o;this._invoke=function(t,n){function i(){return new e((function(e,o){r(t,n,e,o)}))}return o=o?o.then(i,i):i()}}function _(t,r){var n=t.iterator[r.method];if(n===e){if(r.delegate=null,"throw"===r.method){if(t.iterator.return&&(r.method="return",r.arg=e,_(t,r),"throw"===r.method))return d;r.method="throw",r.arg=new TypeError("The iterator does not provide a 'throw' method")}return d}var o=s(n,t.iterator,r.arg);if("throw"===o.type)return r.method="throw",r.arg=o.arg,r.delegate=null,d;var i=o.arg;return i?i.done?(r[t.resultName]=i.value,r.next=t.nextLoc,"return"!==r.method&&(r.method="next",r.arg=e),r.delegate=null,d):i:(r.method="throw",r.arg=new TypeError("iterator result is not an object"),r.delegate=null,d)}function x(t){var e={tryLoc:t[0]};1 in t&&(e.catchLoc=t[1]),2 in t&&(e.finallyLoc=t[2],e.afterLoc=t[3]),this.tryEntries.push(e)}function L(t){var e=t.completion||{};e.type="normal",delete e.arg,t.completion=e}function k(t){this.tryEntries=[{tryLoc:"root"}],t.forEach(x,this),this.reset(!0)}function S(t){if(t){var r=t[i];if(r)return r.call(t);if("function"==typeof t.next)return t;if(!isNaN(t.length)){var o=-1,c=function r(){for(;++o<t.length;)if(n.call(t,o))return r.value=t[o],r.done=!1,r;return r.value=e,r.done=!0,r};return c.next=c}}return{next:C}}function C(){return{value:e,done:!0}}return g.prototype=P.constructor=b,b.constructor=g,g.displayName=a(b,u,"GeneratorFunction"),t.isGeneratorFunction=function(t){var e="function"==typeof t&&t.constructor;return!!e&&(e===g||"GeneratorFunction"===(e.displayName||e.name))},t.mark=function(t){return Object.setPrototypeOf?Object.setPrototypeOf(t,b):(t.__proto__=b,a(t,u,"GeneratorFunction")),t.prototype=Object.create(P),t},t.awrap=function(t){return{__await:t}},j(E.prototype),E.prototype[c]=function(){return this},t.AsyncIterator=E,t.async=function(e,r,n,o,i){void 0===i&&(i=Promise);var c=new E(f(e,r,n,o),i);return t.isGeneratorFunction(r)?c:c.next().then((function(t){return t.done?t.value:c.next()}))},j(P),a(P,u,"Generator"),P[i]=function(){return this},P.toString=function(){return"[object Generator]"},t.keys=function(t){var e=[];for(var r in t)e.push(r);return e.reverse(),function r(){for(;e.length;){var n=e.pop();if(n in t)return r.value=n,r.done=!1,r}return r.done=!0,r}},t.values=S,k.prototype={constructor:k,reset:function(t){if(this.prev=0,this.next=0,this.sent=this._sent=e,this.done=!1,this.delegate=null,this.method="next",this.arg=e,this.tryEntries.forEach(L),!t)for(var r in this)"t"===r.charAt(0)&&n.call(this,r)&&!isNaN(+r.slice(1))&&(this[r]=e)},stop:function(){this.done=!0;var t=this.tryEntries[0].completion;if("throw"===t.type)throw t.arg;return this.rval},dispatchException:function(t){if(this.done)throw t;var r=this;function o(n,o){return u.type="throw",u.arg=t,r.next=n,o&&(r.method="next",r.arg=e),!!o}for(var i=this.tryEntries.length-1;i>=0;--i){var c=this.tryEntries[i],u=c.completion;if("root"===c.tryLoc)return o("end");if(c.tryLoc<=this.prev){var a=n.call(c,"catchLoc"),f=n.call(c,"finallyLoc");if(a&&f){if(this.prev<c.catchLoc)return o(c.catchLoc,!0);if(this.prev<c.finallyLoc)return o(c.finallyLoc)}else if(a){if(this.prev<c.catchLoc)return o(c.catchLoc,!0)}else{if(!f)throw new Error("try statement without catch or finally");if(this.prev<c.finallyLoc)return o(c.finallyLoc)}}}},abrupt:function(t,e){for(var r=this.tryEntries.length-1;r>=0;--r){var o=this.tryEntries[r];if(o.tryLoc<=this.prev&&n.call(o,"finallyLoc")&&this.prev<o.finallyLoc){var i=o;break}}i&&("break"===t||"continue"===t)&&i.tryLoc<=e&&e<=i.finallyLoc&&(i=null);var c=i?i.completion:{};return c.type=t,c.arg=e,i?(this.method="next",this.next=i.finallyLoc,d):this.complete(c)},complete:function(t,e){if("throw"===t.type)throw t.arg;return"break"===t.type||"continue"===t.type?this.next=t.arg:"return"===t.type?(this.rval=this.arg=t.arg,this.method="return",this.next="end"):"normal"===t.type&&e&&(this.next=e),d},finish:function(t){for(var e=this.tryEntries.length-1;e>=0;--e){var r=this.tryEntries[e];if(r.finallyLoc===t)return this.complete(r.completion,r.afterLoc),L(r),d}},catch:function(t){for(var e=this.tryEntries.length-1;e>=0;--e){var r=this.tryEntries[e];if(r.tryLoc===t){var n=r.completion;if("throw"===n.type){var o=n.arg;L(r)}return o}}throw new Error("illegal catch attempt")},delegateYield:function(t,r,n){return this.delegate={iterator:S(t),resultName:r,nextLoc:n},"next"===this.method&&(this.arg=e),d}},t}(t.exports);try{regeneratorRuntime=e}catch(t){Function("r","regeneratorRuntime = r")(e)}}},e={};function r(n){var o=e[n];if(void 0!==o)return o.exports;var i=e[n]={exports:{}};return t[n](i,i.exports,r),i.exports}r(666);r(53)}();    window.page = undefined;
-    window.user = undefined;
-    </script>
-    <script>
-        window.orb = {
-            worldwideNavlinks: '<li class="orb-nav-homedotcom"><a href="https://www.bbc.com/">Home</a></li><li class="orb-nav-newsdotcom"><a href="https://www.bbc.com/news">News</a></li><li class="orb-nav-sport"><a href="https://www.bbc.com/sport">Sport</a></li><li class="orb-nav-reeldotcom"><a href="https://www.bbc.com/reel">Reel</a></li><li class="orb-nav-worklife"><a href="https://www.bbc.com/worklife">Worklife</a></li><li class="orb-nav-traveldotcom"><a href="https://www.bbc.com/travel">Travel</a></li><li class="orb-nav-future"><a href="https://www.bbc.com/future">Future</a></li><li class="orb-nav-culture"><a href="https://www.bbc.com/culture">Culture</a></li><li class="orb-nav-music"><a href="https://www.bbc.com/culture/music">Music</a></li><li class="orb-nav-tv"><a href="https://www.bbc.co.uk/schedules/p00fzl9m">TV</a></li><li class="orb-nav-weather"><a href="https://www.bbc.com/weather">Weather</a></li><li class="orb-nav-sounds"><a href="https://www.bbc.co.uk/sounds">Sounds</a></li>',
-        }
-        </script>
+    <script></script>
+    <script></script>
+    <script></script>
     <script></script>
     <link/>
     <link/>
     <link/>
-    <script>(function () {if (!window.require) {throw new Error('idcta: could not find require module');}if (typeof (map) == 'undefined') {var map = {};}if (!!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect) {document.documentElement.className += ' id-svg';}var ptrt = new RegExp("[\\\\?&]ptrt=([^&]*)").exec(document.location.href);var ENDPOINT_URL = 'https://idcta.api.bbc.co.uk';var ENDPOINT_CONFIG = ('/idcta/config?callback=&ptrt=' + (ptrt ? ptrt[1] : encodeURIComponent(document.location.href))).replace(/\\&amp;/g, '&');var ENDPOINT_TRANSLATIONS = '/idcta/translations?callback=';function hasPromise() {var P = window.Promise;var promiseToString = null;if (P) {try {promiseToString = Object.prototype.toString.call(P.resolve());} catch (e) {/*silently ignored*/}}return (promiseToString === '[object Promise]' && !P.cast);}if (hasPromise()) {define('idcta/es6-promise', function () {return window.Promise;});define('idcta-v2/es6-promise', function () {return window.Promise;});}map['idcta-v2'] = 'https://static.files.bbci.co.uk/account/id-cta/1.54.11/modules/idcta-v2';map['idcta-v2/config'] = ENDPOINT_URL + ENDPOINT_CONFIG;map['idcta-v2/translations'] = ENDPOINT_URL + ENDPOINT_TRANSLATIONS;map['idcta'] = 'https://static.files.bbci.co.uk/account/id-cta/1.8.2/modules/idcta';map['idcta-v2/idcta-1'] = 'https://static.files.bbci.co.uk/account/id-cta/1.54.11/modules/idcta-v2/dist/idcta-1.min';map['idcta-v2/experiment-snippet'] = 'https://cdn.optimizely.com/public/4621041136/s/idcta_live';const idctaShim = {deps: ['idcta-v2/idcta-1'],};require({shim: {'idcta-v2/statusbar': idctaShim,'idcta-v2/id-config': idctaShim},map: {'*': {'idcta/idcta-1': 'idcta-v2/idcta-1','idcta': 'idcta-v2',}},paths: map});window.idctaBaseUrl = ENDPOINT_URL;define('idcta/config', ['idcta-v2/config'], function (data) { return data; });define('idcta/translations', ['idcta-v2/translations'], function (data) { return data; });})();    </script>
+    <script></script>
     <link/>
     <script></script>
-    <script>void 0!==window.define&&define("orb/cookies",function(){return window.bbccookies})    </script>
-    <script>window.__detectview={clickManagementEnabled:false};    </script>
-    <script>"use strict";!function(){window.__reverbStaticLocation="https://mybbc-analytics.files.bbci.co.uk/reverb-client-js/",window.__smarttagVersion="5.29.1",window.__reverb={},window.__reverb.__reverbLoadedPromise=new Promise(function(e,i){window.__reverb.__resolveReverbLoaded=e,window.__reverb.__rejectReverbLoaded=i}),window.__reverb.__reverbTimeout=setTimeout(function(){window.__reverb.__rejectReverbLoaded()},5e3);var i=function(d,a){window.__reverb.__reverbLoadedPromise.then(function(e){if(d&&d.detail){var i=!!d.detail.item,n=d.detail.label,t=i?"viewability":d.detail.type,o=d.detail.elem,r=d.detail.originalEvent;d.detail.isClick&&(a=d.detail.isClick),e.userActionEvent(t,n,d.detail,o,r,a)}},function(){console.log("Reverb failed to load. Event not sent")})},n=function(){window.__reverb.__reverbLoadedPromise.then(function(e){e.initialise().then(function(){return e.viewEvent()})},function(){console.log("Reverb failed to load. Event not sent")})};document.addEventListener("bbc-user-event",function(e){i(e,!1)}),document.addEventListener("bbc-user-click",function(e){i(e,!0)}),document.addEventListener("bbc-page-updated",n),window.addEventListener("pageshow",function(e){e.persisted&&n()})}();    </script>
     <script></script>
-    <script>const adsDebug=/[?|&]ads-debug/.test(window.location.href);var bbcdotcomConfig={},bbcdotcomForgeAsync=!0,googletag=window.googletag||{};googletag.cmd=window.googletag.cmd||[],bbcdotcomScripts=[],tp=window.tp||[],_comscore=window._comscore||[];var bbcdotcom={test:/test/.test(window.location.hostname),adverts:{keyValues:{},breakpoints:{}},advert:{write:function(){},show:function(){},isActive:function(){return!1},layout:function(){return{reset:function(){}}}},config:{init:function(){},isAvailable:function(){return new Promise(function(o){bbcdotcom.resolves?bbcdotcom.resolves.isAvailable.push(o):o(!1)})},isAdsEnabledAsync:function(){return new Promise(function(o){bbcdotcom.resolves?bbcdotcom.resolves.adsEnabled.push(o):o(!1)})},isAnalyticsEnabledAsync:function(){return new Promise(function(o){bbcdotcom.resolves?bbcdotcom.resolves.analyticsEnabled.push(o):o(!1)})},setSections:function(){},setAdsEnabled:function(){},setAnalyticsEnabled:function(){},setAssetPrefix:function(){},setFlagpoles:function(){},setVersion:function(){},setJsPrefix:function(){},setSwfPrefix:function(){},setCssPrefix:function(){},setConfig:function(){},getAssetPrefix:function(){},getJsPrefix:function(){},getSwfPrefix:function(){},getCssPrefix:function(){},isOptimizelyEnabled:function(){},isThirdPartyDisabled:function(){},isThirdPartyDisabledEU:function(){},setEU:function(){}},survey:{init:function(){return!1}},data:{},init:function(){},objects:function(o){return!1},locale:{set:function(){},get:function(){}},setAdKeyValue:function(){},utils:{addEvent:function(){},addHtmlTagClass:function(){},log:function(){}},addLoadEvent:function(){},resolves:{isAvailable:[],adsEnabled:[],analyticsEnabled:[]},resolvePromises:function(){if(bbcdotcom.resolves){for(var o=0;o<bbcdotcom.resolves.isAvailable.length;o++)bbcdotcom.resolves.isAvailable[o](!1);delete bbcdotcom.resolves}},flag:{a:!1,s:!1},asyncCmd:[],isSportApp:function(){var o=window.location.pathname;return void 0!==o&&-1!==o.indexOf(".app")&&0===o.indexOf("/sport")},init:function(o){bbcdotcom.asyncCmd.push(function(){bbcdotcom.init(o)})},slotAsync:function(o,n,t,e){bbcdotcom.asyncCmd.push(function(){bbcdotcom.slotAsync(o,n,t,e)})}};bbcdotcom.adverts.slotAsync=function(o,n,t){bbcdotcom.asyncCmd.push(function(){bbcdotcom.adverts.slotAsync(o,n,t)})},bbcdotcom.config.isAdsEnabled=function(){var o=window.location.pathname;return void 0===o||0!==o.indexOf("/sport")||-1===o.indexOf(".app")},bbcdotcom.config.isActive=function(){var o=window.location.pathname;return void 0===o||0!==o.indexOf("/sport")||-1===o.indexOf(".app")},bbcdotcom.config.isAnalyticsEnabled=function(){return!0},bbcdotcom.registerAd=function(o,n,t){bbcdotcom.asyncCmd.push(function(){bbcdotcom.registerAd(o,n,t)})},bbcdotcom.setAdUnit=function(o){bbcdotcom.asyncCmd.push(function(){bbcdotcom.setAdUnit(o)})},bbcdotcom.adverts.adUnit={},bbcdotcom.adverts.adUnit.setUid=function(o){bbcdotcom.asyncCmd.push(function(){bbcdotcom.adverts.adUnit.setUid(o)})},bbcdotcom.setConfig=function(o){bbcdotcom.asyncCmd.push(function(){bbcdotcom.setConfig(o)})},bbcdotcom.setAdKeyValue=function(o,n){bbcdotcom.asyncCmd.push(function(){bbcdotcom.setAdKeyValue(o,n)})},bbcdotcom.getFeature=function(){return{isEnabled:function(){return!0}}},bbcdotcom.disableAndCloseOpenAds=function(){bbcdotcom.asyncDisableAndCloseOpenAds=!0},bbcdotcom.setAdKeyValue=function(o,n){bbcdotcom.asyncCmd.push(function(){bbcdotcom.adverts.keyValues.set(o,n)})},bbcdotcom.adverts.keyValues.set=function(o,n){bbcdotcom.asyncCmd.push(function(){bbcdotcom.adverts.keyValues.set(o,n)})},bbcdotcom.adverts.keyValues.unset=function(o){bbcdotcom.asyncCmd.push(function(){bbcdotcom.adverts.keyValues.unset(o)})},bbcdotcom.pubsub={},bbcdotcom.pubsub.on=function(o,n){bbcdotcom.asyncCmd.push(function(){bbcdotcom.pubsub.on(o,n)})},bbcdotcom.pubsub.off=function(o,n){bbcdotcom.asyncCmd.push(function(){bbcdotcom.pubsub.off(o,n)})},bbcdotcom.analytics={},bbcdotcom.analytics.page=function(o){bbcdotcom.asyncCmd.push(function(){bbcdotcom.analytics.page(o)})},bbcdotcom.av={emp:{adverts:""}},bbcdotcom.config.isContinuousPlayPage=function(){return!1},bbcdotcom.config.isSportApp=function(){var o=window.location.pathname;return void 0!==o&&-1!==o.indexOf(".app")&&0===o.indexOf("/sport")},bbcdotcom.adverts.breakpoints.setGroupStart=function(o,n){bbcdotcom.asyncCmd.push(function(){bbcdotcom.adverts.breakpoints.setGroupStart(o,n)})},"undefined"!=typeof require&&require({paths:{bbcdotcom:"https://gn-web-assets.api.bbc.com/bbcdotcom/assets/20211208-163512-16377e18c-4.61.0/script"}}),window.bbcdotcom&&bbcdotcom.isSportApp&&!bbcdotcom.isSportApp()&&window.bbcuser.isUKCombined().then(function(o){return o&&!adsDebug?(adsDebug&&console.log("UK location, not ads debug mode, don't load flags, don't load ads."),(o=window.bbcdotcom||{}).config.isAdsEnabled=function(){return!1},o.config.isActive=function(){return!1},o.config.isAnalyticsEnabled=function(){return!1},o.getFeature=function(){return{isEnabled:function(){return!1}}},void o.resolvePromises()):void window.bbcuser.canSeeAdverts().then(function(o){if(!o&&!adsDebug)return adsDebug&&console.log("canSeeAdverts false, not ads debug mode, don't load ads."),(n=window.bbcdotcom||{}).config.isAdsEnabled=function(){return!1},n.config.isActive=function(){return!1},n.config.isAnalyticsEnabled=function(){return!1},n.getFeature=function(){return{isEnabled:function(){return!1}}},void n.resolvePromises();var n=/test/.test(window.location.hostname)?"https://gn-flagpoles.test.api.bbci.co.uk/gnlops":"https://gn-flagpoles.api.bbci.co.uk/gnlops",c=new XMLHttpRequest;c.open("GET",n),c.onload=function(){var n,o,t=JSON.parse(c.responseText),e=window.bbcdotcom||{};e.flag.a="true"===t.adverts?1:0,e.flag.s="true"===t.analytics?1:0,e.flag.a||e.flag.s?(o=/test/.test(window.location.hostname)?"https://gn-flagpoles.test.api.bbci.co.uk/bbcdotcom":"https://gn-flagpoles.api.bbci.co.uk/bbcdotcom",(n=new XMLHttpRequest).open("GET",o),n.onload=function(){var e=JSON.parse(n.responseText),c=window.bbcdotcom||{};[{tp:"thirdPartyEEA"},{d:"adsense"},{asa:"adsportapp"},{l:"lotame"},{p:"platinum"},{g:"grapeshot"},{sh:"sherlock"},{pe:"permutive"},{si:"signin"},{sis:"signinSport"},{sin:"signinNews"},{siw:"signinWWHP"},{piano:"piano"},{fundingchoices_cmp:"fundingchoices_cmp"},{storyworks_cmp:"storyworks_cmp"},{content_rec:"content_rec"},{ias_publisher:"ias_publisher"},{fpd:"fpd"},{sticky_leader_news:"sticky_leader_news"},{sticky_leader_sport:"sticky_leader_sport"}].forEach(function(o,n){for(var t in o)c.flag[t]="true"===e[o[t]]?1:0}),c.data={ads:c.flag.a,stats:c.flag.s,statsProvider:"",country:""},function(){const o=document.createElement("link");o.href="https://gn-web-assets.api.bbc.com/bbcdotcom/assets/20211208-163512-16377e18c-4.61.0/style/bbcdotcom-async.css",o.rel="stylesheet",o.type="text/css",document.head.appendChild(o)}();var o=document.createElement("script"),t=document.head||document.getElementsByTagName("head")[0];o.type="text/javascript",o.async=!0,o.src="https://gn-web-assets.api.bbc.com/bbcdotcom/assets/20211208-163512-16377e18c-4.61.0/script/bbcdotcom.js",o.onload=function(){window.bbcuser.getCountry().then(function(o){c.data.country=o,c.assetPrefix="https://gn-web-assets.api.bbc.com/bbcdotcom/assets/20211208-163512-16377e18c-4.61.0/",bbcdotcomConfig={assetPrefix:"https://gn-web-assets.api.bbc.com/bbcdotcom/assets/20211208-163512-16377e18c-4.61.0/",staticVersion:"20211208-163512-16377e18c-4.61.0",staticPrefix:"https://gn-web-assets.api.bbc.com/bbcdotcom/assets/20211208-163512-16377e18c-4.61.0/"},c.config.init(bbcdotcomConfig,c.data,window.location,window.document),c.config.setAssetPrefix(bbcdotcomConfig.assetPrefix),c.config.setVersion(bbcdotcomConfig.staticVersion),c.config.setFlagpoles(c.flag);o=!!o&&-1!==["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","CH"].indexOf(o.toUpperCase());c.config.setEU(o);var n,o=function(o){var n=document.createElement("link"),t=document.head||document.getElementsByTagName("head")[0];n.href=o,n.rel="dns-prefetch",t.appendChild(n)};c.flag.s&&(o("//secure-us.imrworldwide.com/"),o("//me-cdn.effectivemeasure.net/")),c.flag.a&&(o("//www.googletagservices.com/"),o("//bbc.gscontxt.net/"),(n=document.createElement("meta")).setAttribute("name","google-site-verification"),n.setAttribute("content","auTeTTwSt_KBY_4iDoR00Lwb7-qzx1IgzJy6ztaWgEI"),t.appendChild(n)),c.flag.a&&(c.config.isGrapeshotEnabled()&&!c.config.isWorldService()&&(n=window.location.href.split("?")[0],bbcdotcomScripts.push({src:"https://bbc.gscontxt.net/?url="+encodeURIComponent(n)})),bbcdotcomScripts.push({src:"https://securepubads.g.doubleclick.net/tag/js/gpt.js"}),c.config.isIASEnabled()&&(window.__iasPET=window.__iasPET||{},window.__iasPET.queue=window.__iasPET.queue||[],window.__iasPET.pubId="9708",bbcdotcomScripts.push({src:"https://cdn.adsafeprotected.com/iasPET.1.js"}))),(c.flag.s||c.flag.a)&&(c.config.isPermutiveEnabled()&&!c.config.isWorldService()&&(function(t){if(!t){t=t||{},(window.permutive=t).q=[],t.config={consentRequired:!0},t.config.projectId="e488cdb0-e7cb-4d91-9648-60d437d8e491",t.config.apiKey="1bb84885-9325-4fef-adda-a208032b2715",t.config.environment=t.config.environment||"production";for(var o=["addon","identify","track","trigger","query","segment","segments","ready","on","once","user","consent"],n=0;n<o.length;n++){var e=o[n];t[e]=function(n){return function(){var o=Array.prototype.slice.call(arguments,0);t.q.push({functionName:n,arguments:o})}}(e)}}}((document,window.permutive)),bbcdotcomScripts.push({src:"https://cdn.permutive.com/e488cdb0-e7cb-4d91-9648-60d437d8e491-web.js"})),bbcdotcomScripts.forEach(function(o){var n=document.createElement("script");n.async=!1,o.id&&(n.id=o.id),n.src=o.src,t.appendChild(n)}),window.bbcdotcom.config.isCmpEnabled()?(window.googlefc=window.googlefc||{},window.googlefc.callbackQueue=window.googlefc.callbackQueue||[],new Promise(function(t){window.googlefc.callbackQueue.push({CONSENT_DATA_READY:function(){window.__tcfapi("getTCData",2,function(o,n){n&&o.gdprApplies&&(window.bbcdotcom.consent={},window.bbcdotcom.gdprApplies=!0,window.bbcdotcom.consent.comscore=o.vendor.consents[77],window.bbcdotcom.consent.permutive=o.vendor.consents[360]&&o.vendor.consents[361],window.bbcdotcom.consent.googleads=o.vendor.consents[755],window.bbcdotcom.consent.nielsen=o.vendor.consents[373]&&o.vendor.consents[812],t(!0)),t(!0)},[77,164,360,361,373,755,812])}})}).then(function(){for(window.bbcdotcom.consentChecked=!0,window.bbcdotcom.asyncDisableAndCloseOpenAds&&window.bbcdotcom.asyncCmd.unshift(function(){window.bbcdotcom.disableAndCloseOpenAds()});window.bbcdotcom.asyncCmd&&0<window.bbcdotcom.asyncCmd.length;)window.bbcdotcom.asyncCmd.shift()()}),function(){const o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src="https://gn-web-assets.api.bbc.com/ngas/vendor/fundingchoices/cmp.js",document.head.appendChild(o)}()):function(){for(;window.bbcdotcom.asyncCmd&&0<window.bbcdotcom.asyncCmd.length;)window.bbcdotcom.asyncCmd.shift()()}()),window.adsDebug&&adsDebug&&console.log("bbcdotcom up and running...")})},t.appendChild(o)},n.onerror=function(){var o;(o=window.bbcdotcom||{}).config.isAdsEnabled=function(){return!1},o.config.isActive=function(){return!1},o.config.isAnalyticsEnabled=function(){return!1},o.getFeature=function(){return{isEnabled:function(){return!1}}},o.resolvePromises()},n.send()):((o=window.bbcdotcom||{}).config.isAdsEnabled=function(){return!1},o.config.isActive=function(){return!1},o.config.isAnalyticsEnabled=function(){return!1},o.getFeature=function(){return{isEnabled:function(){return!1}}},o.resolvePromises())},c.onerror=function(){var o;(o=window.bbcdotcom||{}).config.isAdsEnabled=function(){return!1},o.config.isActive=function(){return!1},o.config.isAnalyticsEnabled=function(){return!1},o.getFeature=function(){return{isEnabled:function(){return!1}}},o.resolvePromises()},c.send()})});    </script>
+    <script></script>
+    <script></script>
+    <script></script>
+    <script></script>
     <link/>
     <script></script>
-    <script>
-            (function () {
-              require.config({
-                    baseUrl: 'https://gn-web-assets.api.bbc.com/wwhp/20210923-1449-37491ec2b6e5b4c43bda3673e521e8164a789b87/modules',
-                    paths: {
-                        'bump-3': 'https://emp.bbci.co.uk/emp/bump-3/bump-3',
-                        'domReady': 'vendor/require/domReady',
-                        'jquery-1.9': 'vendor/jquery/jquery'
-                    },
-                    map: {
-                        '*': {
-                            jquery: 'jquery-1.9'
-                        }
-                    },
-                    shim: {
-                        'vendor/bower/underscore/underscore': {
-                            exports: '_'
-                        },
-                        'vendor/bower/js-breakpoints/breakpoints': {
-                            exports: 'Breakpoints'
-                        },
-                        'vendor/bower/cookie-monster/cookie-monster': {
-                            exports: 'monster'
-                        }
-                    }
-                });
-
-                // FIXME: Should be in ads.js, however some devices return ads before ads is able to register to event.
-                if (window.bbcdotcom && bbcdotcom.pubsub) {
-                      var stickyOptions = {
-                      "leaderboard": {
-                          "offset": {
-                              "from": ['.module--leaderboard'],
-                              "to": ['.module--promo', 'bottom']
-                          },
-                          "applyTo": "parent",
-                          "heightLimit": 150,  //don't add sticky if ad is taller than this number
-                          "offsetType": "include",
-                          "parallax": false
-                        },
-                      "mpu": {
-                          "offset": {
-                              "from": ['.content--block--modules section:first-child .module__content'],
-                              "to": ['.content--block--modules section:last-child', 'bottom']
-                          },
-                          "offsetType": "include",
-                      },
-                      /*
-                      "mpu_bottom": {
-                        "offset": {
-                            "from": ['.module--editors-picks .runway--wrapper'],
-                            "to": ['.module--editors-picks .runway--wrapper', 'bottom']
-                        },
-                        "offsetType": "include"
-                      }
-                      */
-                    };
-
-                    bbcdotcom.pubsub.on('ad:done', function(id) {
-                        if(stickyOptions[id]) {
-                            bbcdotcom.stickyAdvert().add(id, document.getElementById('bbccom_'+id), stickyOptions[id]);
-                        }
-                    });
-                }
-
-                if (window.bbcdotcom) {
-                    bbcdotcom.init({ adsToDisplay: ["parallax","leaderboard","native","mpu","platinum","infeed","module_feature-1","module_feature-2","mpu_bottom"] });
-
-                    require(["domReady","compiled"], function (domReady) {
-                        domReady(function () {
-                            require(['app'], function (app) {
-                                app.init(window, {
-                                  staticPrefix: 'https://gn-web-assets.api.bbc.com/wwhp/20210923-1449-37491ec2b6e5b4c43bda3673e521e8164a789b87/',
-                                  continuousPlayEnabled: true,
-                                  counterName: 'home.page',
-                                  producer: 'GNL_HOMEPAGE',
-                                  destination: 'HOMEPAGE_GNL'
-                                });
-                            });
-                        });
-                    });
-                }
-
-            }());
-            </script>
-    <script>
-                var _sf_startpt = (new Date()).getTime();
-                var wwhpEdition = 'us';
-                var _sf_async_config = _sf_async_config || {};
-                _sf_async_config.uid = 50924;
-                _sf_async_config.domain = "bbc.co.uk";
-                _sf_async_config.title = "Homepage"+(wwhpEdition !== '' ? ' - '+wwhpEdition : '');
-                _sf_async_config.sections = "Homepage"+(wwhpEdition !== '' ? ', Homepage - '+wwhpEdition : '');
-                _sf_async_config.region = wwhpEdition;
-                _sf_async_config.path = "/"+(wwhpEdition !== '' ? '?'+wwhpEdition : '');
-                </script>
-    <script>
-                (function(){
-                    /* set correct OptimizelyURL for prod or sandbox */
-                    var optimizelyURL = "https://cdn.optimizely.com/public/4621041136/s/bbccom_sandbox.js";
-                    if(window.location.hostname === 'www.bbc.com') {
-                        optimizelyURL = "https://cdn.optimizely.com/public/4621041136/s/bbccom_prod.js";
-                    }
-
-                    /* Set cookie to 1 year */
-                    window['optimizely'] = window['optimizely'] || [];
-                    window['optimizely'].push({
-                        "type": "cookieExpiration",
-                        "cookieExpirationDays": 365
-                    });
-
-                    var script = document.createElement('script');
-                    script.async = false;
-                    script.src = optimizelyURL;
-                    document.head.appendChild(script);
-                })();
-                </script>
-    <style>    </style>
+    <script></script>
+    <script></script>
+    <script></script>
+    <style></style>
   </head>
   <body>
     <div></div>
@@ -359,7 +125,7 @@
                 </span>
               </a>
             </div>
-            <script>require(['idcta/statusbar'], function (statusbar) {new statusbar.Statusbar({id: 'idcta-statusbar', publiclyCacheable: true});});            </script>
+            <script></script>
             <a href="#">
               <span>
                 Notifications
@@ -501,7 +267,7 @@
           <div>
             <div>
               <div>
-                <script>/*<![CDATA[*/(function() {if (window.bbcdotcom && bbcdotcom.slotAsync) {bbcdotcom.slotAsync("leaderboard", [1,2,3,4]);}})();/*]]>*/                </script>
+                <script></script>
               </div>
             </div>
           </div>
@@ -648,7 +414,7 @@
                     <div>
                       <div>
                         <div>
-                          <script>/*<![CDATA[*/(function() {if (window.bbcdotcom && bbcdotcom.slotAsync) {bbcdotcom.slotAsync("mpu", [1,2,3,4]);}})();/*]]>*/                          </script>
+                          <script></script>
                         </div>
                       </div>
                     </div>
@@ -1120,7 +886,7 @@
         <div>
           <div>
             <div>
-              <script>/*<![CDATA[*/(function() {if (window.bbcdotcom && bbcdotcom.slotAsync) {bbcdotcom.slotAsync("platinum", [1,2,3,4]);}})();/*]]>*/              </script>
+              <script></script>
             </div>
           </div>
         </div>
@@ -1199,19 +965,19 @@
                       </div>
                       <div>
                         <h3>
-                          <a href="https://www.bbc.com/worklife/article/20210507-why-we-glorify-the-cult-of-burnout-and-overwork">
-                            Why we buy into the 'cult' of overwork
+                          <a href="https://www.bbc.com/worklife/article/20211201-family-estrangement-why-adults-are-cutting-off-their-parents">
+                            A silent epidemic of family break-ups?
                           </a>
                         </h3>
                         <p>
-                          How were we duped into finding overwork glamorous?
+                          "The declaration of 'I am done' with a family member is a powerful phenomenon"
                         </p>
                         <a href="http://www.bbc.com/worklife">
                           Worklife
                         </a>
                       </div>
-                      <a href="https://www.bbc.com/worklife/article/20210507-why-we-glorify-the-cult-of-burnout-and-overwork">
-                        Why we buy into the 'cult' of overwork
+                      <a href="https://www.bbc.com/worklife/article/20211201-family-estrangement-why-adults-are-cutting-off-their-parents">
+                        A silent epidemic of family break-ups?
                       </a>
                     </div>
                   </li>
@@ -1387,7 +1153,7 @@
               <div>
                 <div>
                   <div>
-                    <script>/*<![CDATA[*/(function() {if (window.bbcdotcom && bbcdotcom.slotAsync) {bbcdotcom.slotAsync("native", [1,2,3,4]);}})();/*]]>*/                    </script>
+                    <script></script>
                   </div>
                 </div>
               </div>
@@ -1520,7 +1286,7 @@
                     <div>
                       <div>
                         <div>
-                          <script>/*<![CDATA[*/(function() {if (window.bbcdotcom && bbcdotcom.slotAsync) {bbcdotcom.slotAsync("module_feature-1", [1,2,3,4]);}})();/*]]>*/                          </script>
+                          <script></script>
                         </div>
                       </div>
                     </div>
@@ -1535,7 +1301,7 @@
                   <div>
                     <div>
                       <div>
-                        <script>/*<![CDATA[*/(function() {if (window.bbcdotcom && bbcdotcom.slotAsync) {bbcdotcom.slotAsync("infeed", [1,2,3,4]);}})();/*]]>*/                        </script>
+                        <script></script>
                       </div>
                     </div>
                   </div>
@@ -1576,7 +1342,7 @@
                     <div>
                       <div>
                         <div>
-                          <script>/*<![CDATA[*/(function() {if (window.bbcdotcom && bbcdotcom.slotAsync) {bbcdotcom.slotAsync("module_feature-2", [1,2,3,4]);}})();/*]]>*/                          </script>
+                          <script></script>
                         </div>
                       </div>
                     </div>
@@ -2049,7 +1815,7 @@
         <div>
           <div>
             <div>
-              <script>/*<![CDATA[*/(function() {if (window.bbcdotcom && bbcdotcom.slotAsync) {bbcdotcom.slotAsync("parallax", [1,2,3,4]);}})();/*]]>*/              </script>
+              <script></script>
             </div>
           </div>
         </div>
@@ -2427,7 +2193,7 @@
                 <div>
                   <div>
                     <div>
-                      <script>/*<![CDATA[*/(function() {if (window.bbcdotcom && bbcdotcom.slotAsync) {bbcdotcom.slotAsync("mpu_bottom", [1,2,3,4]);}})();/*]]>*/                      </script>
+                      <script></script>
                     </div>
                   </div>
                 </div>
@@ -2970,57 +2736,8 @@
           </div>
         </section>
       </div>
-      <script>
-                (function(){
-                    function updateNavBar(){
-                        var navEl = document.createElement("li"),
-                            aEl = document.createElement("a"),
-                            orbNav = document.querySelectorAll(".orb-panel-content ul")[0],
-                            orbNavWeather = document.querySelectorAll(".orb-panel-content .orb-nav-weather")[0];
-                        navEl.setAttribute("class", "orb-nav-bbcselect orb-nav-hide");
-                        aEl.setAttribute("href", "https://www.bbcselect.com");
-                        aEl.innerHTML = "BBC Select";
-                        navEl.appendChild(aEl);
-                        try {
-                            if(typeof orbNav !== "undefined" && typeof orbNavWeather !== "undefined") {
-                                orbNav.insertBefore(navEl, orbNavWeather);
-                                if (window.bbcuser && window.bbcuser.getCountry && typeof (window.bbcuser.getCountry) === 'function') {
-                                    window.bbcuser.getCountry().then(function (countryCode) {
-                                        var isValid = countryCode && ['US', 'CA'].indexOf(countryCode.toUpperCase()) !== -1;
-                                        /*if no countryCode return, we default to the edition css to show-hide */
-                                        if (countryCode && !isValid) {
-                                            document.getElementsByClassName('orb-nav-bbcselect')[0].remove();
-                                        }
-                                        if (countryCode && countryCode.toUpperCase() === 'CA') {
-                                            aEl.setAttribute("href", "https://www.bbcselect.com/ca/")
-                                        }
-                                    });
-                                }
-                                clearInterval(window.isNavBarReadyInterval);
-                            }
-                        } catch(e) {}
-                    }
-
-                    window.isNavBarReadyInterval = setInterval(updateNavBar, 500);
-                    setTimeout(function (){
-                        clearInterval(window.isNavBarReadyInterval);
-                    }, 5000);
-                })();
-                  </script>
-      <script>
-                (function(){
-                    function loadChartbeat() {
-                        window._sf_endpt=(new Date()).getTime();
-                        var e = document.createElement("script");
-                        e.setAttribute("language", "javascript");
-                        e.setAttribute("type", "text/javascript");
-                        e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
-                        document.body.appendChild(e);
-                    }
-                    var oldonload = window.onload;
-                    window.onload = (typeof window.onload != "function") ? loadChartbeat : function() { oldonload(); loadChartbeat(); };
-                }());
-                  </script>
+      <script></script>
+      <script></script>
     </div>
     <div>
       <div></div>
@@ -3109,8 +2826,7 @@
       </aside>
       <footer>
         <div>
-          <script>window.orb = window.orb || {};
-                window.orb.worldwideFooterlinks = '<li class="orb-footer-ads"><a href="https://www.bbcglobalnews.com/">Advertise with us<' + '/a><' + '/li><li class="orb-footer-adchoices"><a href="https://www.bbc.com/usingthebbc/cookies/how-does-the-bbc-use-cookies-for-advertising/">AdChoices / Do Not Sell My Info<' + '/a><' + '/li>';          </script>
+          <script></script>
           <div>
             <div>
               <ul>
@@ -3171,69 +2887,20 @@
         </div>
       </footer>
     </div>
-    <script>{"imports":{"orbit-drawer":"https://static.files.bbci.co.uk/orbit/8161b75793cc3c38d814e1a4a19a2f6a/js/drawer-api.bundle.js","bbccookies":"https://static.files.bbci.co.uk/cookies/6868f40b6841deedfcf9895de775e1ab/cookie-banner/cookie-library.module.js"}}    </script>
     <script></script>
     <script></script>
     <script></script>
     <script></script>
     <script></script>
-    <script>/*<![CDATA[*/
-       require(['orb/nav'], function(nav) {
-         window.bbcuser.isUKCombined().then(function(isUK) {
-           if (isUK) {
-             nav.loadJs('https://static.files.bbci.co.uk/orbit/8161b75793cc3c38d814e1a4a19a2f6a/js/edr.min.js');
-           }
-         });
-       });
-       /*]]>*/    </script>
-    <script>require.config({
-            paths: {
-                "mybbc/templates": '//mybbc.files.bbci.co.uk/notification-ui/4.3.7/templates',
-                "mybbc/notifications": '//mybbc.files.bbci.co.uk/notification-ui/4.3.7/js'
-            }
-        });
-
-        require(['mybbc/notifications/NotificationsMain', 'idcta/idcta-1'], function (NotificationsMain, idcta) {
-
-            var loadNotifications = function (isUK) {
-                if (isUK) {
-                    window.bbcpage.loadCSS('//mybbc.files.bbci.co.uk/notification-ui/4.3.7/css/main.min.css').then(function() {
-                        NotificationsMain.run(idcta, '//mybbc.files.bbci.co.uk/notification-ui/4.3.7/');
-                    });
-                }
-            };
-            
-            window.bbcuser.isUKCombined().then(function(isUK) {
-                loadNotifications(isUK);
-            });
-        });    </script>
-    <script>if (window.bbcuser && window.bbcuser.isUKCombined) {
-        bbcuser.isUKCombined().then(function (isUK) {
-            if (isUK) {
-                const isOrbUx = !!document.querySelector('.orb-nav-pri-container');
-                if (isOrbUx) {
-                    const script = document.createElement('script');
-                    script.src = 'https://nav.files.bbci.co.uk/searchbox/2cd6a3726054d3497a75216cad71fe85//js/old-search-suggest.js';
-                    script.async = true;
-                    script.setAttribute('data-static-prefix', 'https://nav.files.bbci.co.uk/searchbox/2cd6a3726054d3497a75216cad71fe85/');
-                    script.setAttribute('data-variant', 'default');
-                    document.head.appendChild(script);
-                } else {
-                    import('https://nav.files.bbci.co.uk/searchbox/2cd6a3726054d3497a75216cad71fe85//js/search-suggest.js').then(drawer => {
-                        drawer.setupSearchDrawer({
-                            searchboxAppStaticPrefix: 'https://nav.files.bbci.co.uk/searchbox/2cd6a3726054d3497a75216cad71fe85/',
-                            variant: 'default',
-                        });
-                    });
-                }
-            }
-        });
-    }    </script>
-    <script></script>
-    <script>window.COOKIES_STATIC_HOST="https://static.files.bbci.co.uk/cookies/6868f40b6841deedfcf9895de775e1ab/cookie-banner/cookie-prompt/"    </script>
     <script></script>
     <script></script>
-    <script>"use strict";window.__reverb.__reverbLoadedPromise.then(function(e){return e.initialise().then(function(){return e.viewEvent()})},function(){console.log("Failed to load reverb. No event sent")});    </script>
+    <script></script>
+    <script></script>
+    <script></script>
+    <script></script>
+    <script></script>
+    <script></script>
+    <script></script>
     <noscript>
       <img/>
     </noscript>
