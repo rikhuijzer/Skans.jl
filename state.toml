@@ -8,33 +8,7 @@
     <meta/>
     <meta/>
     <meta/>
-    <style>
-    body {
-        background-color: #f0f0f2;
-        margin: 0;
-        padding: 0;
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        
-    }
-    div {
-        width: 600px;
-        margin: 5em auto;
-        padding: 2em;
-        background-color: #fdfdff;
-        border-radius: 0.5em;
-        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);
-    }
-    a:link, a:visited {
-        color: #38488f;
-        text-decoration: none;
-    }
-    @media (max-width: 700px) {
-        div {
-            margin: 0 auto;
-            width: auto;
-        }
-    }
-        </style>
+    <style>    </style>
   </head>
   <body>
     <div>
@@ -82,12 +56,7 @@
     <meta/>
     <link/>
     <meta/>
-    <style>
-:root {
-    --bbc-font: ReithSans, Arial, Helvetica, freesans, sans-serif;
-    --bbc-font-legacy: Arial, Helvetica, freesans, sans-serif;
-}
-    </style>
+    <style>    </style>
     <script></script>
     <link/>
     <script></script>
@@ -342,11 +311,7 @@
                     document.head.appendChild(script);
                 })();
                 </script>
-    <style>
-            body.wwhp-edition-us .orb-nav-bbcselect {
-                display: block;
-            }
-            </style>
+    <style>    </style>
   </head>
   <body>
     <div></div>
@@ -2109,19 +2074,19 @@
                       </div>
                       <div>
                         <h3>
-                          <a href="/news/entertainment-arts-59770828">
-                            'My work has just disappeared because of Omicron'
+                          <a href="/news/entertainment-arts-59770835">
+                            Jon Snow bows out of Channel 4 News after 32 years
                           </a>
                         </h3>
                         <p>
-                          Three performers and crew members count the cost to them and their jobs caused by the latest wave.
+                          The long-serving 74-year-old's last show is described as "an emotional one for the whole newsroom".
                         </p>
                         <a href="/news/entertainment_and_arts">
                           Entertainment &amp; Arts
                         </a>
                       </div>
-                      <a href="/news/entertainment-arts-59770828">
-                        'My work has just disappeared because of Omicron'
+                      <a href="/news/entertainment-arts-59770835">
+                        Jon Snow bows out of Channel 4 News after 32 years
                       </a>
                     </div>
                   </li>
