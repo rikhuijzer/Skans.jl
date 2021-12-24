@@ -1,5 +1,11 @@
 
 @testset "select" begin
+    actual = Skans.remove_extra_href_info("href" => "www.bbc.com?bar")
+    @test last(actual) == "www.bbc.com?[...]"
+
+    actual = Skans.remove_extra_href_info("href" => "#header")
+    @test last(actual) == "#[...]"
+
     html = """
         <!doctype html>
         <html lang="en">
@@ -28,7 +34,7 @@
                 <div class="name"><a href="/">NAME</a></div>
                 <nav>
                     <ul>
-                        <li><a href="/about/">About</a></li>
+                        <li><a href="/about?digest!3223">About</a></li>
                     </ul>
                 </nav>
             </header>
@@ -70,7 +76,7 @@
               <nav>
                 <ul>
                   <li>
-                    <a href="/about/">
+                    <a href="/about?[...]">
                       About
                     </a>
                   </li>

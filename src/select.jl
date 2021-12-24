@@ -30,11 +30,30 @@ function clean(elem::HTMLElement{T}) where T
     return HTMLElement{T}(children, parent, attributes)
 end
 
+function remove_extra_href_info(entry::Pair)
+    url = last(entry)
+    symbol_loc = findfirst(r"\?|#", url)
+    if isnothing(symbol_loc)
+        return entry
+    else
+        symbol_loc_start = first(findfirst(r"\?|#", url))
+        stripped = url[1:symbol_loc_start] * "[...]"
+        new_entry::Pair = first(entry) => stripped
+        return new_entry
+    end
+end
+
+function remove_extra_href_info(dic::Dict)::Dict
+    pairs = [remove_extra_href_info(entry) for entry in dic]
+    return Dict(pairs)
+end
+
 function clean(elem::HTMLElement{:a})
     children = elem.children
     parent = elem.parent
     attributes = filter(entry -> first(entry) == "href", elem.attributes)
-    return HTMLElement{:a}(children, parent, attributes)
+    updated_attributes = remove_extra_href_info(attributes)
+    return HTMLElement{:a}(children, parent, updated_attributes)
 end
 
 function clean(elem::T) where T<:Union{HTMLElement{:style},HTMLElement{:script}}
