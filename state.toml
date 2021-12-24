@@ -105,7 +105,7 @@
               </h2>
               <ul>
                 <li>
-                  <a href="#orb-modules">
+                  <a href="#[...]">
                     Skip to content
                   </a>
                 </li>
@@ -126,7 +126,7 @@
               </a>
             </div>
             <script></script>
-            <a href="#">
+            <a href="#[...]">
               <span>
                 Notifications
               </span>
@@ -209,7 +209,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#orb-footer">
+                  <a href="#[...]">
                     Menu
                     <span></span>
                   </a>
@@ -218,7 +218,7 @@
             </div>
           </nav>
           <div>
-            <a href="https://search.bbc.co.uk/search?scope=all">
+            <a href="https://search.bbc.co.uk/search?[...]">
               Search
             </a>
             <form>
@@ -341,16 +341,16 @@
                   </div>
                   <div>
                     <h3>
-                      <a href="/news/world-asia-59777784">
-                        Dozens killed in Bangladesh ferry blaze
+                      <a href="/news/world-us-canada-59785677">
+                        Police stray bullet kills girl in LA clothes shop
                       </a>
                     </h3>
-                    <a href="/news/world/asia">
-                      Asia
+                    <a href="/news/world/us_and_canada">
+                      US &amp; Canada
                     </a>
                   </div>
-                  <a href="/news/world-asia-59777784">
-                    Dozens killed in Bangladesh ferry blaze
+                  <a href="/news/world-us-canada-59785677">
+                    Police stray bullet kills girl in LA clothes shop
                   </a>
                 </div>
               </li>
@@ -442,19 +442,19 @@
                             </div>
                             <div>
                               <h3>
-                                <a href="/news/world-asia-india-59778426">
-                                  India outrage over anti-Muslim hate speech
+                                <a href="/news/world-asia-59777784">
+                                  Dozens killed in Bangladesh ferry blaze
                                 </a>
                               </h3>
                               <p>
-                                Viral videos show Hindu religious leaders making provocative anti-Muslim speeches at a conclave in Haridwar.
+                                At least 39 people die and about 100 are injured after a ferry catches fire in southern Bangladesh.
                               </p>
-                              <a href="/news/world/asia/india">
-                                India
+                              <a href="/news/world/asia">
+                                Asia
                               </a>
                             </div>
-                            <a href="/news/world-asia-india-59778426">
-                              India outrage over anti-Muslim hate speech
+                            <a href="/news/world-asia-59777784">
+                              Dozens killed in Bangladesh ferry blaze
                             </a>
                           </div>
                         </li>
@@ -469,19 +469,19 @@
                             </div>
                             <div>
                               <h3>
-                                <a href="/news/health-59769967">
-                                  Omicron: Good news, bad news and what it all means
+                                <a href="/news/world-asia-india-59778426">
+                                  India outrage over anti-Muslim hate speech
                                 </a>
                               </h3>
                               <p>
-                                There are many things in our favour, but Omicron is spreading fast. What have we learned this week?
+                                Viral videos show Hindu religious leaders making provocative anti-Muslim speeches at a conclave in Haridwar.
                               </p>
-                              <a href="/news/health">
-                                Health
+                              <a href="/news/world/asia/india">
+                                India
                               </a>
                             </div>
-                            <a href="/news/health-59769967">
-                              Omicron: Good news, bad news and what it all means
+                            <a href="/news/world-asia-india-59778426">
+                              India outrage over anti-Muslim hate speech
                             </a>
                           </div>
                         </li>
@@ -534,33 +534,6 @@
                             </div>
                             <div>
                               <h3>
-                                <a href="/sport/football/59779209">
-                                  Burnley-Everton game postponed
-                                </a>
-                              </h3>
-                              <p>
-                                The Premier League postpones Everton's match at Burnley on Sunday because of coronavirus cases and injuries.
-                              </p>
-                              <a href="/sport/football">
-                                Football
-                              </a>
-                            </div>
-                            <a href="/sport/football/59779209">
-                              Burnley-Everton game postponed
-                            </a>
-                          </div>
-                        </li>
-                        <li>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <img/>
-                                </div>
-                              </div>
-                            </div>
-                            <div>
-                              <h3>
                                 <a href="/sport/cricket/59778957">
                                   'Be brave and eradicate mistakes' - Root
                                 </a>
@@ -588,19 +561,46 @@
                             </div>
                             <div>
                               <h3>
-                                <a href="/sport/cricket/59781100">
-                                  Ex-India off-spinner Harbhajan retires
+                                <a href="/sport/american-football/59785378">
+                                  Everett injured in fatal accident
                                 </a>
                               </h3>
                               <p>
-                                Former India off-spinner Harbhajan Singh retires from all forms of cricket, making the announcement in a social media post.
+                                Washington Football Team player Deshazor Everett is in hospital with "serious but not life-threatening injuries" after being involved in a car accident in which a passenger died.
                               </p>
-                              <a href="/sport/cricket">
-                                Cricket
+                              <a href="/sport/american-football">
+                                American Football
                               </a>
                             </div>
-                            <a href="/sport/cricket/59781100">
-                              Ex-India off-spinner Harbhajan retires
+                            <a href="/sport/american-football/59785378">
+                              Everett injured in fatal accident
+                            </a>
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            <div>
+                              <div>
+                                <div>
+                                  <img/>
+                                </div>
+                              </div>
+                            </div>
+                            <div>
+                              <h3>
+                                <a href="/sport/africa/59780212">
+                                  African cycling team's World Tour hopes over
+                                </a>
+                              </h3>
+                              <p>
+                                Team Qhubeka NextHash, Africa's top cycling team, fails in its bid to secure a World Tour spot in 2022.
+                              </p>
+                              <a href="/sport/africa">
+                                Sport Africa
+                              </a>
+                            </div>
+                            <a href="/sport/africa/59780212">
+                              African cycling team's World Tour hopes over
                             </a>
                           </div>
                         </li>
@@ -707,7 +707,7 @@
                             <h2>
                               London Weather
                             </h2>
-                            <a href="#">
+                            <a href="#[...]">
                               Edit
                             </a>
                           </div>
@@ -725,21 +725,18 @@
                         <div>
                           <ul>
                             <li>
-                              <a href="/weather/2643743?day=0">
+                              <a href="/weather/2643743?[...]">
                                 <img/>
                                 <h3>
                                   Fri
                                 </h3>
-                                <p>
-                                  10°C
-                                </p>
                                 <p>
                                   8°C
                                 </p>
                               </a>
                             </li>
                             <li>
-                              <a href="/weather/2643743?day=1">
+                              <a href="/weather/2643743?[...]">
                                 <img/>
                                 <h3>
                                   Sat
@@ -753,7 +750,7 @@
                               </a>
                             </li>
                             <li>
-                              <a href="/weather/2643743?day=2">
+                              <a href="/weather/2643743?[...]">
                                 <img/>
                                 <h3>
                                   Sun
@@ -767,7 +764,7 @@
                               </a>
                             </li>
                             <li>
-                              <a href="/weather/2643743?day=3">
+                              <a href="/weather/2643743?[...]">
                                 <img/>
                                 <h3>
                                   Mon
@@ -1256,7 +1253,7 @@
               <li>
                 <div>
                   <h2>
-                    <a href="https://www.bbcselect.com/queen-victorias-children/?utm_source=BBC+Homepage&amp;utm_medium=Module&amp;utm_campaign=Queen+Victoria%27s+Children&amp;utm_content=Landing+Page">
+                    <a href="https://www.bbcselect.com/queen-victorias-children/?[...]">
                       Select
                     </a>
                   </h2>
@@ -1270,16 +1267,16 @@
                         </div>
                       </div>
                       <div>
-                        <a href="https://www.bbcselect.com/queen-victorias-children/?utm_source=BBC+Homepage&amp;utm_medium=Module&amp;utm_campaign=Queen+Victoria%27s+Children&amp;utm_content=Landing+Page">
+                        <a href="https://www.bbcselect.com/queen-victorias-children/?[...]">
                           Now Showing
                         </a>
                         <h3>
-                          <a href="https://www.bbcselect.com/queen-victorias-children/?utm_source=BBC+Homepage&amp;utm_medium=Module&amp;utm_campaign=Queen+Victoria%27s+Children&amp;utm_content=Landing+Page">
+                          <a href="https://www.bbcselect.com/queen-victorias-children/?[...]">
                             How Queen Victoria used Christmas to hide the truth
                           </a>
                         </h3>
                       </div>
-                      <a href="https://www.bbcselect.com/queen-victorias-children/?utm_source=BBC+Homepage&amp;utm_medium=Module&amp;utm_campaign=Queen+Victoria%27s+Children&amp;utm_content=Landing+Page">
+                      <a href="https://www.bbcselect.com/queen-victorias-children/?[...]">
                         How Queen Victoria used Christmas to hide the truth
                       </a>
                     </div>
@@ -1394,17 +1391,17 @@
               <div>
                 <ul>
                   <li>
-                    <a href="#">
+                    <a href="#[...]">
                       Recommended
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="#[...]">
                       Most Watched
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="#[...]">
                       Latest
                     </a>
                   </li>
@@ -1802,12 +1799,12 @@
               </h2>
               <div>
                 <i></i>
-                <a href="http://www.bbc.co.uk/programmes/p005ftyb">
+                <a href="http://www.bbc.co.uk/programmes/p016tklr">
                   <span>
                     On Air:
                   </span>
                   <span>
-                    A Festival of Nine Lessons and Carols
+                    The Newsroom
                   </span>
                 </a>
               </div>
@@ -1842,19 +1839,19 @@
                       </div>
                       <div>
                         <h3>
-                          <a href="/news/entertainment-arts-59726874">
-                            The British singer unknown at home, but a hero in France
+                          <a href="/news/entertainment-arts-59762286">
+                            LadBaby score historic fourth Christmas number one
                           </a>
                         </h3>
                         <p>
-                          Murray Head is all but forgotten in the UK, but in his adopted home France he ranks among the...
+                          They surpass the Beatles and the Spice Girls as the act with the most festive chart-toppers in a...
                         </p>
                         <a href="/news/entertainment_and_arts">
                           Entertainment &amp; Arts
                         </a>
                       </div>
-                      <a href="/news/entertainment-arts-59726874">
-                        The British singer unknown at home, but a hero in France
+                      <a href="/news/entertainment-arts-59762286">
+                        LadBaby score historic fourth Christmas number one
                       </a>
                     </div>
                   </li>
@@ -2015,6 +2012,23 @@
                   </h2>
                   <ul>
                     <li>
+                      <a href="https://www.bbc.com/news/health-59769967">
+                        <div>
+                          <div>
+                            <div>
+                              <img/>
+                            </div>
+                          </div>
+                        </div>
+                        <h3>
+                          Omicron: Good news, bad news and what it all means
+                          <span>
+                            By James Gallager
+                          </span>
+                        </h3>
+                      </a>
+                    </li>
+                    <li>
                       <a href="https://www.bbc.com/news/science-environment-59725597">
                         <div>
                           <div>
@@ -2129,23 +2143,6 @@
                           Why it matters No 10's press chief was at the party
                           <span>
                             By Laura Kuenssberg
-                          </span>
-                        </h3>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.bbc.com/news/uk-politics-59600519">
-                        <div>
-                          <div>
-                            <div>
-                              <img/>
-                            </div>
-                          </div>
-                        </div>
-                        <h3>
-                          Three fined for parties on same day as No 10 event
-                          <span>
-                            By Dominic Casciani
                           </span>
                         </h3>
                       </a>
@@ -2393,8 +2390,8 @@
                       </a>
                     </h3>
                     <p>
-                      <a href="/persian/iran-59780661">
-                        عربستان تایید کرد که ویزای دیپلمات‌های ایرانی را به عنوان عضو سازمان همکاری اسلامی صادر کرده
+                      <a href="/persian/iran-59785307">
+                        بریتانیا: پرتاب موشک‌های بالستیک سپاه، نقض قطعنامه ۲۲۳۱ است
                       </a>
                     </p>
                   </li>
@@ -2405,8 +2402,8 @@
                       </a>
                     </h3>
                     <p>
-                      <a href="/mundo/noticias-internacional-59497643">
-                        Cómo fueron las horas previas al colapso de la poderosa Unión Soviética hace 30 años
+                      <a href="/mundo/noticias-59729006">
+                        James Webb: por qué la Agencia Espacial Europea lanza sus cohetes desde Sudamérica
                       </a>
                     </p>
                   </li>
@@ -2417,8 +2414,8 @@
                       </a>
                     </h3>
                     <p>
-                      <a href="/urdu/regional-59782784">
-                        کانپور: تاجر کے گھر پر انکم ٹیکس کے چھاپے میں کم از کم 150 کروڑ روپے برآمد
+                      <a href="/urdu/world-59748714">
+                        چلی کا الیکشن ترکی میں جشن: چلی کے طلبا رہنما کی کامیابی ترکی میں زیرِ بحث کیوں؟
                       </a>
                     </p>
                   </li>
