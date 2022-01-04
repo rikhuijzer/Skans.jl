@@ -150,13 +150,13 @@ end
 function update!(repo::MockRepo, state::State, scan::PageScan)
     key = scan.page.url
     repo.state.scans[key] = scan
-    return repo
+    return (repo, nothing)
 end
 
 function update!(repo::MockRepo, state::State, scans::Vector)
     filter!(!isnothing, scans)
     foreach(scan -> update!(repo, state, scan), scans)
-    return repo
+    return (repo, nothing)
 end
 
 function update!(repo::Repo, state::State, scans::Vector)
@@ -168,7 +168,7 @@ function update!(repo::Repo, state::State, scans::Vector)
         state.scans[key] = scan
     end
     store!(repo, state)
-    commit!(repo)
-    return repo
+    dif = commit!(repo)
+    return (repo, dif)
 end
 

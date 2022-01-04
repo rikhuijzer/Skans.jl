@@ -55,11 +55,11 @@ href(url::String) = "<$url>"
 
 hli(text) = "- $text"
 
-function md(repo::GitHubRepo, changed::Vector{PageScan})
+function md(changed::Vector{PageScan}, dif)
     urls = [string(scan.page.url)::String for scan in changed]
     items = hli.(href.(urls))
     text = join(items, '\n')
-    details = code_block(cleandiff(repo.dir), "diff")
+    details = code_block(cleandiff(dif), "diff")
     return """
         The following pages changed:
 
@@ -81,21 +81,22 @@ function skans_issue_number(repo::GitHubRepo)
     return skans_issue_number(issues)
 end
 
-function post_issue_comment!(repo::GitHubRepo, num::Int, changed::Vector{PageScan})
+function post_issue_comment!(repo::GitHubRepo, num::Int, changed::Vector{PageScan}, dif)
     repository = repo.repo
     url = "https://api.github.com/repos/$repository/issues/$num/comments"
     headers = github_headers(repo)
-    text = md(repo, changed)
+    text = md(changed, dif)
     dic = Dict(:body => text)
     js = json(dic)
     return post(url, headers, js)
 end
 
-function post_issue_comment!(repo::GitHubRepo, changed::Vector{PageScan})
+function post_issue_comment!(repo::GitHubRepo, changed::Vector{PageScan}, dif)
     issues = list_issues(repo)
     num = skans_issue_number(issues)
     if num == -1
         num = create_issue!(repo)
     end
-    return post_issue_comment!(repo, num, changed)
+    return post_issue_comment!(repo, num, changed, dif)
 end
+

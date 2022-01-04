@@ -58,6 +58,7 @@ git_unchanged() = read(`git status --porcelain`, String) == ""
 function commit!(repo::Repo)
     dir = clone_dir(repo)
     branch = repo.branch
+    dif = diff()
     cd(dir) do
         if "CI" in keys(ENV)
             run(`git config --global user.email "skansbot@example.com"`)
@@ -72,6 +73,7 @@ function commit!(repo::Repo)
             run(`git push --set-upstream origin $branch`)
         end
     end
+    return dif
 end
 
 """
@@ -102,13 +104,28 @@ function startswith_one(s::AbstractString, c::Char)::Bool
 end
 
 """
-    cleandiff(dir::AbstractString=pwd())
+    diff(old::AbstractString, new::AbstractString)
+
+Return a diff comparing `old` to `new`.
+"""
+function diff(old::AbstractString, new::AbstractString)
+    mktempdir() do dir
+        old_path = joinpath(dir, "old.txt")
+        new_path = joinpath(dir, "new.txt")
+        write(old_path, old * '\n')
+        write(new_path, new * '\n')
+        cmd = `git diff --no-index $old_path $new_path`
+        return read(ignorestatus(cmd), String)
+    end
+end
+
+"""
+    cleandiff(uncleaned::AbstractString)
 
 Return the output of a cleaned up `git diff` inside `dir`.
 This keeps only lines starting with `+` or `-` except `+++` or `---` lines.
 """
-function cleandiff(dir::AbstractString=pwd())
-    uncleaned = diff(dir)
+function cleandiff(uncleaned::AbstractString)
     sep = '\n'
     lines = split(uncleaned, sep)
     filtered = filter(lines) do line
