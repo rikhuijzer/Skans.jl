@@ -72,6 +72,7 @@ function commit!(repo::Repo)
             run(`git push --set-upstream origin $branch`)
         end
     end
+    return nothing
 end
 
 """
@@ -101,14 +102,39 @@ function startswith_one(s::AbstractString, c::Char)::Bool
     end
 end
 
+struct BeforeAfter
+    old::Union{PageScan,Nothing}
+    new::PageScan
+end
+
 """
-    cleandiff(dir::AbstractString=pwd())
+    diff(old::AbstractString, new::AbstractString)
+
+Return a diff comparing `old` to `new`.
+"""
+function diff(old::AbstractString, new::AbstractString)
+    mktempdir() do dir
+        old_path = joinpath(dir, "old.txt")
+        new_path = joinpath(dir, "new.txt")
+        write(old_path, old * '\n')
+        write(new_path, new * '\n')
+        cmd = `git diff --no-index $old_path $new_path`
+        return read(ignorestatus(cmd), String)
+    end
+end
+
+function diff(ba::BeforeAfter)
+    old = isnothing(ba.old) ? "" : ba.old.content
+    return diff(old, ba.new.content)
+end
+
+"""
+    cleandiff(uncleaned::AbstractString)
 
 Return the output of a cleaned up `git diff` inside `dir`.
 This keeps only lines starting with `+` or `-` except `+++` or `---` lines.
 """
-function cleandiff(dir::AbstractString=pwd())
-    uncleaned = diff(dir)
+function cleandiff(uncleaned::AbstractString)
     sep = '\n'
     lines = split(uncleaned, sep)
     filtered = filter(lines) do line
@@ -116,8 +142,8 @@ function cleandiff(dir::AbstractString=pwd())
     end
     threshold = 22
     if threshold < length(filtered)
-        filtered = first(filtered, threshold)
-        push!(filtered, "[...]")
+        filtered = last(filtered, threshold)
+        pushfirst!(filtered, "[...]")
     end
     return join(filtered, sep)
 end

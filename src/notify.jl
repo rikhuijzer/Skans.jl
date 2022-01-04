@@ -55,19 +55,22 @@ href(url::String) = "<$url>"
 
 hli(text) = "- $text"
 
-function md(repo::GitHubRepo, changed::Vector{PageScan})
-    urls = [string(scan.page.url)::String for scan in changed]
-    items = hli.(href.(urls))
+function md(changed::Vector{BeforeAfter})
+    items = map(changed) do ba
+        cleaned = cleandiff(diff(ba))
+        block = code_block(cleaned, "diff")
+        url = href(string(ba.old.page.url))
+        item = """
+            ### $url:
+
+            $block
+            """
+    end
     text = join(items, '\n')
-    details = code_block(cleandiff(repo.dir), "diff")
     return """
         The following pages changed:
 
         $text
-
-        Details:
-
-        $details
         """
 end
 
@@ -81,17 +84,17 @@ function skans_issue_number(repo::GitHubRepo)
     return skans_issue_number(issues)
 end
 
-function post_issue_comment!(repo::GitHubRepo, num::Int, changed::Vector{PageScan})
+function post_issue_comment!(repo::GitHubRepo, num::Int, changed::Vector{BeforeAfter})
     repository = repo.repo
     url = "https://api.github.com/repos/$repository/issues/$num/comments"
     headers = github_headers(repo)
-    text = md(repo, changed)
+    text = md(changed)
     dic = Dict(:body => text)
     js = json(dic)
     return post(url, headers, js)
 end
 
-function post_issue_comment!(repo::GitHubRepo, changed::Vector{PageScan})
+function post_issue_comment!(repo::GitHubRepo, changed::Vector{BeforeAfter})
     issues = list_issues(repo)
     num = skans_issue_number(issues)
     if num == -1
@@ -99,3 +102,4 @@ function post_issue_comment!(repo::GitHubRepo, changed::Vector{PageScan})
     end
     return post_issue_comment!(repo, num, changed)
 end
+
