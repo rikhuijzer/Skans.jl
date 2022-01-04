@@ -17,12 +17,12 @@ jobs:
     timeout-minutes: 15
 
     steps:
+      - uses: actions/checkout@v2
+
       - shell: julia --color=yes {0}
         run: |
-          using Pkg
-          branch = "${{ env.GITHUB_REF_NAME }}"
-          url = "https://github.com/rikhuijzer/Skans.jl#$branch"
-          Pkg.add(; url)
+          using Pkg: develop
+          develop(; path=pwd())
 
       - shell: julia --color=yes {0}
         env:
