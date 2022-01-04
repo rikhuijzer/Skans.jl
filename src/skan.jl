@@ -22,11 +22,11 @@ function skan!(repo, pages::Vector{<:Page}; notify=true)::Vector{PageScan}
     # Without this, filtered may become a `Vector{Union{Nothing, Skans.PageScan}}`.
     filtered = convert(Array{PageScan}, changed)
 
-    update!(repo, state, filtered)
-
     if notify && !isempty(filtered)
         post_issue_comment!(repo, filtered)
     end
+
+    update!(repo, state, filtered)
 
     return changed
 end
