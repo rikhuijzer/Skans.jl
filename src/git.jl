@@ -114,5 +114,18 @@ function cleandiff(dir::AbstractString=pwd())
     filtered = filter(lines) do line
         startswith_one(line, '+') || startswith_one(line, '-')
     end
+    threshold = 22
+    if threshold < length(filtered)
+        filtered = first(filtered, threshold)
+        push!(filtered, "[...]")
+    end
     return join(filtered, sep)
+end
+
+function code_block(s::AbstractString, class::AbstractString)
+    return """
+        ```$class
+        $s
+        ```
+        """
 end

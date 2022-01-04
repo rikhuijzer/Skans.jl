@@ -55,14 +55,19 @@ href(url::String) = "<$url>"
 
 hli(text) = "- $text"
 
-function md(changed::Vector{PageScan})
+function md(repo::GitHubRepo, changed::Vector{PageScan})
     urls = [string(scan.page.url)::String for scan in changed]
     items = hli.(href.(urls))
     text = join(items, '\n')
+    details = code_block(cleandiff(repo.dir), "diff")
     return """
         The following pages changed:
 
         $text
+
+        Details:
+
+        $details
         """
 end
 
@@ -80,7 +85,8 @@ function post_issue_comment!(repo::GitHubRepo, num::Int, changed::Vector{PageSca
     repository = repo.repo
     url = "https://api.github.com/repos/$repository/issues/$num/comments"
     headers = github_headers(repo)
-    dic = Dict(:body => md(changed))
+    text = md(repo, changed)
+    dic = Dict(:body => text)
     js = json(dic)
     return post(url, headers, js)
 end
