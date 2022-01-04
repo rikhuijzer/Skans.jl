@@ -11,14 +11,4 @@
 
 Monitor web pages and get notified when a page has changed.
 
-## Use-cases
-
-Monitor pages for:
-
-- New job offers
-- Availability (error detection)
-- Updated product pricing
-- New (financial) reports or press releases
-- Updates to legislation
-
 See <https://skans.dev> for more information.
