@@ -60,6 +60,12 @@ end
     Skans.pull_or_clone!(repo)
 end
 
+@testset "diff" begin
+    @test Skans.startswith_one("+", '+') == true
+    @test Skans.startswith_one("+-", '+') == true
+    @test Skans.startswith_one("++", '+') == false
+end
+
 @testset "Store and read MockFileRepo" begin
     repo = Skans.MockFileRepo()
     changed = skan!(repo, PAGES; notify)
