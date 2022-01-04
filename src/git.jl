@@ -58,7 +58,6 @@ git_unchanged() = read(`git status --porcelain`, String) == ""
 function commit!(repo::Repo)
     dir = clone_dir(repo)
     branch = repo.branch
-    dif = diff()
     cd(dir) do
         if "CI" in keys(ENV)
             run(`git config --global user.email "skansbot@example.com"`)
@@ -73,7 +72,7 @@ function commit!(repo::Repo)
             run(`git push --set-upstream origin $branch`)
         end
     end
-    return dif
+    return nothing
 end
 
 """
@@ -103,6 +102,11 @@ function startswith_one(s::AbstractString, c::Char)::Bool
     end
 end
 
+struct BeforeAfter
+    old::Union{PageScan,Nothing}
+    new::PageScan
+end
+
 """
     diff(old::AbstractString, new::AbstractString)
 
@@ -119,6 +123,11 @@ function diff(old::AbstractString, new::AbstractString)
     end
 end
 
+function diff(ba::BeforeAfter)
+    old = isnothing(ba.old) ? "" : ba.old.content
+    return diff(old, ba.new.content)
+end
+
 """
     cleandiff(uncleaned::AbstractString)
 
@@ -133,8 +142,8 @@ function cleandiff(uncleaned::AbstractString)
     end
     threshold = 22
     if threshold < length(filtered)
-        filtered = first(filtered, threshold)
-        push!(filtered, "[...]")
+        filtered = last(filtered, threshold)
+        pushfirst!(filtered, "[...]")
     end
     return join(filtered, sep)
 end
