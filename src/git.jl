@@ -74,3 +74,45 @@ function commit!(repo::Repo)
     end
 end
 
+"""
+    diff(dir::AbstractString=pwd())
+
+Return the output of `git diff` inside `dir`.
+"""
+function diff(dir::AbstractString=pwd())
+    cd(dir) do
+        cmd = `git diff`
+        return read(cmd, String)
+    end
+end
+
+"""
+    startswith_one(s::AbstractString, c::Char)::Bool
+
+Return `true` if and only if `c` is at the first position in `s` and not the second.
+"""
+function startswith_one(s::AbstractString, c::Char)::Bool
+    if length(s) == 0
+        return false
+    elseif length(s) == 1
+        return s[1] == c
+    else
+        return s[1] == c && s[2] != c
+    end
+end
+
+"""
+    cleandiff(dir::AbstractString=pwd())
+
+Return the output of a cleaned up `git diff` inside `dir`.
+This keeps only lines starting with `+` or `-` except `+++` or `---` lines.
+"""
+function cleandiff(dir::AbstractString=pwd())
+    uncleaned = diff(dir)
+    sep = '\n'
+    lines = split(uncleaned, sep)
+    filtered = filter(lines) do line
+        startswith_one(line, '+') || startswith_one(line, '-')
+    end
+    return join(filtered, sep)
+end
