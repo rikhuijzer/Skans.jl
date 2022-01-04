@@ -18,7 +18,11 @@ jobs:
 
     steps:
       - shell: julia --color=yes {0}
-        run: 'using Pkg; Pkg.add(; url="https://github.com/rikhuijzer/Skans.jl#main")'
+        run: |
+          using Pkg
+          branch = "${{ env.GITHUB_REF_NAME }}"
+          url = "https://github.com/rikhuijzer/Skans.jl#$branch"
+          Pkg.add(; url)
 
       - shell: julia --color=yes {0}
         env:
