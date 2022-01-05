@@ -59,7 +59,7 @@ function md(changed::Vector{BeforeAfter})
     items = map(changed) do ba
         cleaned = cleandiff(diff(ba))
         block = code_block(cleaned, "diff")
-        url = href(string(ba.old.page.url))
+        url = href(string(ba.new.page.url))
         item = """
             ### $url:
 
