@@ -1,7 +1,7 @@
 name = "Skans"
 uuid = "a745460b-2075-4384-80fc-e13528d5f107"
 authors = ["Rik Huijzer <t.h.huijzer@rug.nl>"]
-version = "1.2.1"
+version = "1.2.2"
 
 [deps]
 AbstractTrees = "1520ce14-60c1-5f80-bbc7-55ef81b5835c"
