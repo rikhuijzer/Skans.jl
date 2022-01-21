@@ -7,8 +7,8 @@ on:
   pull_request:
   workflow_dispatch:
   schedule:
-    # Run every day at 16:00.
-    - cron: '00 16 * * *'
+    # Run 16:00 UTC on Friday.
+    - cron: '00 16 * * 5'
 
 jobs:
   skan:
